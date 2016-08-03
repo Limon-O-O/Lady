@@ -14,28 +14,30 @@ public class RGBToneCurveFilter: CIFilter {
 
     public var inputIntensity: CGFloat = 1.0
 
-    var inputRedControlPoints = [CIVector(x: 0.0, y: 0.0), CIVector(x: 0.5, y: 0.5), CIVector(x: 1.0, y: 1.0)] {
+    private static let defaultCurveControlPoints = [CIVector(x: 0.0, y: 0.0), CIVector(x: 0.5, y: 0.5), CIVector(x: 1.0, y: 1.0)]
+
+    var inputRedControlPoints = RGBToneCurveFilter.defaultCurveControlPoints {
         didSet {
             redCurve = []
             toneCurveTexture = nil
         }
     }
 
-    var inputGreenControlPoints = [CIVector(x: 0.0, y: 0.0), CIVector(x: 0.5, y: 0.5), CIVector(x: 1.0, y: 1.0)] {
+    var inputGreenControlPoints = RGBToneCurveFilter.defaultCurveControlPoints {
         didSet {
             greenCurve = []
             toneCurveTexture = nil
         }
     }
 
-    var inputBlueControlPoints = [CIVector(x: 0.0, y: 0.0), CIVector(x: 0.5, y: 0.5), CIVector(x: 1.0, y: 1.0)] {
+    var inputBlueControlPoints = RGBToneCurveFilter.defaultCurveControlPoints {
         didSet {
             blueCurve = []
             toneCurveTexture = nil
         }
     }
 
-    var inputRGBCompositeControlPoints = [CIVector(x: 0.0, y: 0.0), CIVector(x: 0.5, y: 0.5), CIVector(x: 1.0, y: 1.0)] {
+    var inputRGBCompositeControlPoints = RGBToneCurveFilter.defaultCurveControlPoints {
         didSet {
             rgbCompositeCurve = []
             toneCurveTexture = nil
@@ -81,13 +83,11 @@ public class RGBToneCurveFilter: CIFilter {
             self.inputIntensity
         ]
 
-        RGBToneCurveFilter.kernel.applyWithExtent(unwrappedInputImage.extent, roiCallback: { (index, destRect) -> CGRect in
+        return RGBToneCurveFilter.kernel.applyWithExtent(unwrappedInputImage.extent, roiCallback: { (index, destRect) -> CGRect in
 
             return index == 0 ? destRect : unwrappedToneCurveTexture.extent
 
         }, arguments: arguments)
-
-        return nil
     }
 
     private func updateToneCurveTexture() {
@@ -133,10 +133,21 @@ public class RGBToneCurveFilter: CIFilter {
 
     public override func setDefaults() {
 
-        inputRedControlPoints = []
-        inputGreenControlPoints = []
-        inputBlueControlPoints = []
-        inputRGBCompositeControlPoints = []
+        inputRedControlPoints = RGBToneCurveFilter.defaultCurveControlPoints
+        inputGreenControlPoints = RGBToneCurveFilter.defaultCurveControlPoints
+        inputBlueControlPoints = RGBToneCurveFilter.defaultCurveControlPoints
+        inputRGBCompositeControlPoints = RGBToneCurveFilter.defaultCurveControlPoints
+
+        inputIntensity = 1.0
+
+        inputImage = nil
+
+        toneCurveTexture = nil
+
+        redCurve = []
+        greenCurve = []
+        blueCurve = []
+        rgbCompositeCurve = []
     }
 
 }
