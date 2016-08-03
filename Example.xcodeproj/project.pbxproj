@@ -12,7 +12,37 @@
 		ED23AC351D51BF7E00E441A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED23AC331D51BF7E00E441A9 /* Main.storyboard */; };
 		ED23AC371D51BF7E00E441A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED23AC361D51BF7E00E441A9 /* Assets.xcassets */; };
 		ED23AC3A1D51BF7E00E441A9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED23AC381D51BF7E00E441A9 /* LaunchScreen.storyboard */; };
+		ED23AC491D51BFB400E441A9 /* Lady.h in Headers */ = {isa = PBXBuildFile; fileRef = ED23AC481D51BFB400E441A9 /* Lady.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ED23AC4D1D51BFB400E441A9 /* Lady.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED23AC461D51BFB400E441A9 /* Lady.framework */; };
+		ED23AC4E1D51BFB400E441A9 /* Lady.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ED23AC461D51BFB400E441A9 /* Lady.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		ED23AC541D51BFDF00E441A9 /* FilterConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED23AC531D51BFDF00E441A9 /* FilterConstructor.swift */; };
+		ED23AC561D51C17800E441A9 /* RGBToneCurveFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED23AC551D51C17800E441A9 /* RGBToneCurveFilter.swift */; };
+		ED6EE7CD1D5221B2006D678E /* RGBToneCurveFilter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = ED6EE7CC1D5221B2006D678E /* RGBToneCurveFilter.cikernel */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		ED23AC4B1D51BFB400E441A9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ED23AC241D51BF7E00E441A9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ED23AC451D51BFB400E441A9;
+			remoteInfo = Lady;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		ED23AC521D51BFB400E441A9 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				ED23AC4E1D51BFB400E441A9 /* Lady.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		ED23AC2C1D51BF7E00E441A9 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -22,10 +52,24 @@
 		ED23AC361D51BF7E00E441A9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ED23AC391D51BF7E00E441A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ED23AC3B1D51BF7E00E441A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ED23AC461D51BFB400E441A9 /* Lady.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Lady.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED23AC481D51BFB400E441A9 /* Lady.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Lady.h; sourceTree = "<group>"; };
+		ED23AC4A1D51BFB400E441A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ED23AC531D51BFDF00E441A9 /* FilterConstructor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterConstructor.swift; sourceTree = "<group>"; };
+		ED23AC551D51C17800E441A9 /* RGBToneCurveFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGBToneCurveFilter.swift; sourceTree = "<group>"; };
+		ED6EE7CC1D5221B2006D678E /* RGBToneCurveFilter.cikernel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = RGBToneCurveFilter.cikernel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		ED23AC291D51BF7E00E441A9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED23AC4D1D51BFB400E441A9 /* Lady.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED23AC421D51BFB400E441A9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -39,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				ED23AC2E1D51BF7E00E441A9 /* Example */,
+				ED23AC471D51BFB400E441A9 /* Lady */,
 				ED23AC2D1D51BF7E00E441A9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -47,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				ED23AC2C1D51BF7E00E441A9 /* Example.app */,
+				ED23AC461D51BFB400E441A9 /* Lady.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -64,7 +110,30 @@
 			path = Example;
 			sourceTree = "<group>";
 		};
+		ED23AC471D51BFB400E441A9 /* Lady */ = {
+			isa = PBXGroup;
+			children = (
+				ED23AC481D51BFB400E441A9 /* Lady.h */,
+				ED23AC4A1D51BFB400E441A9 /* Info.plist */,
+				ED23AC531D51BFDF00E441A9 /* FilterConstructor.swift */,
+				ED23AC551D51C17800E441A9 /* RGBToneCurveFilter.swift */,
+				ED6EE7CC1D5221B2006D678E /* RGBToneCurveFilter.cikernel */,
+			);
+			path = Lady;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		ED23AC431D51BFB400E441A9 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED23AC491D51BFB400E441A9 /* Lady.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		ED23AC2B1D51BF7E00E441A9 /* Example */ = {
@@ -74,15 +143,35 @@
 				ED23AC281D51BF7E00E441A9 /* Sources */,
 				ED23AC291D51BF7E00E441A9 /* Frameworks */,
 				ED23AC2A1D51BF7E00E441A9 /* Resources */,
+				ED23AC521D51BFB400E441A9 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				ED23AC4C1D51BFB400E441A9 /* PBXTargetDependency */,
 			);
 			name = Example;
 			productName = Example;
 			productReference = ED23AC2C1D51BF7E00E441A9 /* Example.app */;
 			productType = "com.apple.product-type.application";
+		};
+		ED23AC451D51BFB400E441A9 /* Lady */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ED23AC4F1D51BFB400E441A9 /* Build configuration list for PBXNativeTarget "Lady" */;
+			buildPhases = (
+				ED23AC411D51BFB400E441A9 /* Sources */,
+				ED23AC421D51BFB400E441A9 /* Frameworks */,
+				ED23AC431D51BFB400E441A9 /* Headers */,
+				ED23AC441D51BFB400E441A9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Lady;
+			productName = Lady;
+			productReference = ED23AC461D51BFB400E441A9 /* Lady.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
@@ -95,6 +184,9 @@
 				ORGANIZATIONNAME = Lady;
 				TargetAttributes = {
 					ED23AC2B1D51BF7E00E441A9 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					ED23AC451D51BFB400E441A9 = {
 						CreatedOnToolsVersion = 7.3.1;
 					};
 				};
@@ -113,6 +205,7 @@
 			projectRoot = "";
 			targets = (
 				ED23AC2B1D51BF7E00E441A9 /* Example */,
+				ED23AC451D51BFB400E441A9 /* Lady */,
 			);
 		};
 /* End PBXProject section */
@@ -128,6 +221,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		ED23AC441D51BFB400E441A9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED6EE7CD1D5221B2006D678E /* RGBToneCurveFilter.cikernel in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -140,7 +241,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		ED23AC411D51BFB400E441A9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED23AC541D51BFDF00E441A9 /* FilterConstructor.swift in Sources */,
+				ED23AC561D51C17800E441A9 /* RGBToneCurveFilter.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		ED23AC4C1D51BFB400E441A9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ED23AC451D51BFB400E441A9 /* Lady */;
+			targetProxy = ED23AC4B1D51BFB400E441A9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		ED23AC331D51BF7E00E441A9 /* Main.storyboard */ = {
@@ -249,7 +367,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = Example/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = top.limon.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -260,10 +380,57 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = Example/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = top.limon.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		ED23AC501D51BFB400E441A9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Lady/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = top.limon.Lady;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		ED23AC511D51BFB400E441A9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Lady/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = top.limon.Lady;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -286,6 +453,16 @@
 				ED23AC401D51BF7E00E441A9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ED23AC4F1D51BFB400E441A9 /* Build configuration list for PBXNativeTarget "Lady" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ED23AC501D51BFB400E441A9 /* Debug */,
+				ED23AC511D51BFB400E441A9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
