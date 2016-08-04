@@ -23,6 +23,8 @@
 		EDAB85CD1D5334EB0019D33A /* HighPassSkinSmoothingFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAB85CC1D5334EB0019D33A /* HighPassSkinSmoothingFilter.swift */; };
 		EDAB85CF1D5335FC0019D33A /* GreenBlueChannelOverlayBlendFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAB85CE1D5335FC0019D33A /* GreenBlueChannelOverlayBlendFilter.swift */; };
 		EDAB85D11D53367A0019D33A /* GreenBlueChannelOverlayBlendFilter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = EDAB85D01D53367A0019D33A /* GreenBlueChannelOverlayBlendFilter.cikernel */; };
+		EDAB85D31D53373A0019D33A /* HighPassSkinSmoothingMaskBoostFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAB85D21D53373A0019D33A /* HighPassSkinSmoothingMaskBoostFilter.swift */; };
+		EDAB85D51D5337700019D33A /* HighPassSkinSmoothingMaskBoostFilter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = EDAB85D41D5337700019D33A /* HighPassSkinSmoothingMaskBoostFilter.cikernel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +70,8 @@
 		EDAB85CC1D5334EB0019D33A /* HighPassSkinSmoothingFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighPassSkinSmoothingFilter.swift; sourceTree = "<group>"; };
 		EDAB85CE1D5335FC0019D33A /* GreenBlueChannelOverlayBlendFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GreenBlueChannelOverlayBlendFilter.swift; sourceTree = "<group>"; };
 		EDAB85D01D53367A0019D33A /* GreenBlueChannelOverlayBlendFilter.cikernel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GreenBlueChannelOverlayBlendFilter.cikernel; sourceTree = "<group>"; };
+		EDAB85D21D53373A0019D33A /* HighPassSkinSmoothingMaskBoostFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighPassSkinSmoothingMaskBoostFilter.swift; sourceTree = "<group>"; };
+		EDAB85D41D5337700019D33A /* HighPassSkinSmoothingMaskBoostFilter.cikernel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = HighPassSkinSmoothingMaskBoostFilter.cikernel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +137,8 @@
 				ED6EE7D01D5223A9006D678E /* HighPass.cikernel */,
 				EDAB85CE1D5335FC0019D33A /* GreenBlueChannelOverlayBlendFilter.swift */,
 				EDAB85D01D53367A0019D33A /* GreenBlueChannelOverlayBlendFilter.cikernel */,
+				EDAB85D21D53373A0019D33A /* HighPassSkinSmoothingMaskBoostFilter.swift */,
+				EDAB85D41D5337700019D33A /* HighPassSkinSmoothingMaskBoostFilter.cikernel */,
 			);
 			path = Lady;
 			sourceTree = "<group>";
@@ -241,6 +247,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED6EE7CD1D5221B2006D678E /* RGBToneCurveFilter.cikernel in Resources */,
+				EDAB85D51D5337700019D33A /* HighPassSkinSmoothingMaskBoostFilter.cikernel in Resources */,
 				ED6EE7D11D5223A9006D678E /* HighPass.cikernel in Resources */,
 				EDAB85D11D53367A0019D33A /* GreenBlueChannelOverlayBlendFilter.cikernel in Resources */,
 			);
@@ -262,6 +269,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDAB85D31D53373A0019D33A /* HighPassSkinSmoothingMaskBoostFilter.swift in Sources */,
 				ED23AC541D51BFDF00E441A9 /* FilterConstructor.swift in Sources */,
 				ED6EE7CF1D52231F006D678E /* HighPassFilter.swift in Sources */,
 				EDAB85CD1D5334EB0019D33A /* HighPassSkinSmoothingFilter.swift in Sources */,
