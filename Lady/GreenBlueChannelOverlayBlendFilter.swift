@@ -21,9 +21,9 @@ class GreenBlueChannelOverlayBlendFilter: CIFilter {
 
     private static let kernel: CIColorKernel = {
 
-        let shaderPath = NSBundle.mainBundle().pathForResource("\(self)", ofType: "cikernel")
+        let shaderPath = NSBundle(forClass: GreenBlueChannelOverlayBlendFilter.self).pathForResource("\(GreenBlueChannelOverlayBlendFilter.self)", ofType: "cikernel")
 
-        guard let path = shaderPath, kernelString = try? String(contentsOfFile: path), kernel = CIColorKernel(string: kernelString) else {
+        guard let path = shaderPath, kernelString = try? String(contentsOfFile: path, encoding: NSUTF8StringEncoding), kernel = CIColorKernel(string: kernelString) else {
 
             fatalError("Unable to build GreenBlueChannelOverlayBlendFilter Kernel")
         }

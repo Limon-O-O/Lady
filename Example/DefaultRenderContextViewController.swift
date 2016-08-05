@@ -22,6 +22,7 @@ class DefaultRenderContextViewController: UIViewController,UIImagePickerControll
             self.inputCIImage = CIImage(CGImage: self.sourceImage.CGImage!)
         }
     }
+
     var processedImage: UIImage?
     
     var inputCIImage: CIImage!
@@ -40,39 +41,32 @@ class DefaultRenderContextViewController: UIViewController,UIImagePickerControll
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         self.dismissViewControllerAnimated(true, completion: nil)
         self.sourceImage = image
-        self.processImage()
+        self.processImage(byInputAmount: self.amountSlider.value)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.sourceImage = UIImage(named: "SampleImage")!
-        self.processImage()
-    }
-    
-    @IBAction func amountSliderTouchUp(sender: AnyObject) {
-        self.processImage()
+        self.processImage(byInputAmount: self.amountSlider.value)
     }
 
-    func processImage() {
+    @IBAction func amountSliderTouchUp(sender: UISlider) {
+        self.processImage(byInputAmount: sender.value)
+    }
 
+    func processImage(byInputAmount inputAmount: Float) {
 
-        let filter = CIFilter(name: "YUCIHighPassSkinSmoothing")!
-        filter.setValue(inputCIImage, forKey: kCIInputImageKey)
-        filter.setValue(self.amountSlider.value, forKey: "inputAmount")
-        filter.setValue(7.0 * inputCIImage.extent.width/750.0, forKey: kCIInputRadiusKey)
+        self.filter.inputImage = inputCIImage
+        self.filter.inputAmount = CGFloat(inputAmount)
+        self.filter.inputRadius = 7.0 * inputCIImage.extent.width/750.0
+
         let outputCIImage = filter.outputImage!
 
-//        self.filter.inputImage = self.inputCIImage
-//        self.filter.inputAmount = self.amountSlider.value
-//        self.filter.inputRadius = 7.0 * self.inputCIImage.extent.width/750.0
-
-//        let outputCIImage = filter.outputImage!
-
-        let outputCGImage = self.context.createCGImage(outputCIImage, fromRect: outputCIImage.extent)
-        let outputUIImage = UIImage(CGImage: outputCGImage, scale: self.sourceImage.scale, orientation: self.sourceImage.imageOrientation)
+        let outputCGImage = context.createCGImage(outputCIImage, fromRect: outputCIImage.extent)
+        let outputUIImage = UIImage(CGImage: outputCGImage, scale: self.sourceImage.scale, orientation: sourceImage.imageOrientation)
         
         self.processedImage = outputUIImage
-        self.imageView.image = self.processedImage
+        self.imageView.image = outputUIImage
     }
     
     @IBAction func handleImageViewLongPress(sender: UILongPressGestureRecognizer) {

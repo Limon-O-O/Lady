@@ -18,7 +18,7 @@
 		ED23AC561D51C17800E441A9 /* RGBToneCurveFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED23AC551D51C17800E441A9 /* RGBToneCurveFilter.swift */; };
 		ED6EE7CD1D5221B2006D678E /* RGBToneCurveFilter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = ED6EE7CC1D5221B2006D678E /* RGBToneCurveFilter.cikernel */; };
 		ED6EE7CF1D52231F006D678E /* HighPassFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6EE7CE1D52231F006D678E /* HighPassFilter.swift */; };
-		ED6EE7D11D5223A9006D678E /* HighPass.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = ED6EE7D01D5223A9006D678E /* HighPass.cikernel */; };
+		ED6EE7D11D5223A9006D678E /* HighPassFilter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = ED6EE7D01D5223A9006D678E /* HighPassFilter.cikernel */; };
 		EDAB85CD1D5334EB0019D33A /* HighPassSkinSmoothingFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAB85CC1D5334EB0019D33A /* HighPassSkinSmoothingFilter.swift */; };
 		EDAB85CF1D5335FC0019D33A /* GreenBlueChannelOverlayBlendFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAB85CE1D5335FC0019D33A /* GreenBlueChannelOverlayBlendFilter.swift */; };
 		EDAB85D11D53367A0019D33A /* GreenBlueChannelOverlayBlendFilter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = EDAB85D01D53367A0019D33A /* GreenBlueChannelOverlayBlendFilter.cikernel */; };
@@ -69,7 +69,7 @@
 		ED23AC551D51C17800E441A9 /* RGBToneCurveFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGBToneCurveFilter.swift; sourceTree = "<group>"; };
 		ED6EE7CC1D5221B2006D678E /* RGBToneCurveFilter.cikernel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = RGBToneCurveFilter.cikernel; sourceTree = "<group>"; };
 		ED6EE7CE1D52231F006D678E /* HighPassFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighPassFilter.swift; sourceTree = "<group>"; };
-		ED6EE7D01D5223A9006D678E /* HighPass.cikernel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = HighPass.cikernel; sourceTree = "<group>"; };
+		ED6EE7D01D5223A9006D678E /* HighPassFilter.cikernel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = HighPassFilter.cikernel; sourceTree = "<group>"; };
 		EDAB85CC1D5334EB0019D33A /* HighPassSkinSmoothingFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighPassSkinSmoothingFilter.swift; sourceTree = "<group>"; };
 		EDAB85CE1D5335FC0019D33A /* GreenBlueChannelOverlayBlendFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GreenBlueChannelOverlayBlendFilter.swift; sourceTree = "<group>"; };
 		EDAB85D01D53367A0019D33A /* GreenBlueChannelOverlayBlendFilter.cikernel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GreenBlueChannelOverlayBlendFilter.cikernel; sourceTree = "<group>"; };
@@ -145,7 +145,7 @@
 				ED23AC551D51C17800E441A9 /* RGBToneCurveFilter.swift */,
 				ED6EE7CC1D5221B2006D678E /* RGBToneCurveFilter.cikernel */,
 				ED6EE7CE1D52231F006D678E /* HighPassFilter.swift */,
-				ED6EE7D01D5223A9006D678E /* HighPass.cikernel */,
+				ED6EE7D01D5223A9006D678E /* HighPassFilter.cikernel */,
 				EDAB85CE1D5335FC0019D33A /* GreenBlueChannelOverlayBlendFilter.swift */,
 				EDAB85D01D53367A0019D33A /* GreenBlueChannelOverlayBlendFilter.cikernel */,
 				EDAB85D21D53373A0019D33A /* HighPassSkinSmoothingMaskBoostFilter.swift */,
@@ -260,7 +260,7 @@
 			files = (
 				ED6EE7CD1D5221B2006D678E /* RGBToneCurveFilter.cikernel in Resources */,
 				EDAB85D51D5337700019D33A /* HighPassSkinSmoothingMaskBoostFilter.cikernel in Resources */,
-				ED6EE7D11D5223A9006D678E /* HighPass.cikernel in Resources */,
+				ED6EE7D11D5223A9006D678E /* HighPassFilter.cikernel in Resources */,
 				EDAB85D11D53367A0019D33A /* GreenBlueChannelOverlayBlendFilter.cikernel in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

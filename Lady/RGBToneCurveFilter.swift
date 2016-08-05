@@ -14,28 +14,30 @@ public class RGBToneCurveFilter: CIFilter {
 
     public var inputIntensity: CGFloat = 1.0
 
-    var inputRedControlPoints = defaultCurveControlPoints {
+    public static let defaultCurveControlPoints = [CIVector(x: 0.0, y: 0.0), CIVector(x: 0.5, y: 0.5), CIVector(x: 1.0, y: 1.0)]
+
+    var inputRedControlPoints = RGBToneCurveFilter.defaultCurveControlPoints {
         didSet {
             redCurve = []
             toneCurveTexture = nil
         }
     }
 
-    var inputGreenControlPoints = defaultCurveControlPoints {
+    var inputGreenControlPoints = RGBToneCurveFilter.defaultCurveControlPoints {
         didSet {
             greenCurve = []
             toneCurveTexture = nil
         }
     }
 
-    var inputBlueControlPoints = defaultCurveControlPoints {
+    var inputBlueControlPoints = RGBToneCurveFilter.defaultCurveControlPoints {
         didSet {
             blueCurve = []
             toneCurveTexture = nil
         }
     }
 
-    var inputRGBCompositeControlPoints = defaultCurveControlPoints {
+    var inputRGBCompositeControlPoints = RGBToneCurveFilter.defaultCurveControlPoints {
         didSet {
             rgbCompositeCurve = []
             toneCurveTexture = nil
@@ -46,11 +48,11 @@ public class RGBToneCurveFilter: CIFilter {
 
     private var redCurve = [CGFloat](), greenCurve = [CGFloat](), blueCurve = [CGFloat](), rgbCompositeCurve = [CGFloat]()
 
-    private static let kernel: CIColorKernel = {
+    private static let kernel: CIKernel = {
 
-        let shaderPath = NSBundle.mainBundle().pathForResource("\(self)", ofType: "cikernel")
+        let shaderPath = NSBundle(forClass: RGBToneCurveFilter.self).pathForResource("\(RGBToneCurveFilter.self)", ofType: "cikernel")
 
-        guard let path = shaderPath, kernelString = try? String(contentsOfFile: path), kernel = CIColorKernel(string: kernelString) else {
+        guard let path = shaderPath, kernelString = try? String(contentsOfFile: path, encoding: NSUTF8StringEncoding), kernel = CIKernel(string: kernelString) else {
 
             fatalError("Unable to build RGBToneCurve Kernel")
         }
@@ -126,15 +128,16 @@ public class RGBToneCurveFilter: CIFilter {
         }
 
         let data = NSData(bytesNoCopy: toneCurveBytes, length: length, freeWhenDone: true)
+
         toneCurveTexture = CIImage(bitmapData: data, bytesPerRow: length, size: CGSizeMake(256, 1), format: kCIFormatBGRA8, colorSpace: nil)
     }
 
     public override func setDefaults() {
 
-        inputRedControlPoints = defaultCurveControlPoints
-        inputGreenControlPoints = defaultCurveControlPoints
-        inputBlueControlPoints = defaultCurveControlPoints
-        inputRGBCompositeControlPoints = defaultCurveControlPoints
+        inputRedControlPoints = RGBToneCurveFilter.defaultCurveControlPoints
+        inputGreenControlPoints = RGBToneCurveFilter.defaultCurveControlPoints
+        inputBlueControlPoints = RGBToneCurveFilter.defaultCurveControlPoints
+        inputRGBCompositeControlPoints = RGBToneCurveFilter.defaultCurveControlPoints
 
         inputIntensity = 1.0
 
@@ -157,6 +160,7 @@ extension RGBToneCurveFilter {
     private func getPreparedSplineCurve(points: [CIVector]) -> [CGFloat] {
 
         if let cachedCurve = RGBToneCurveFilter.splineCurveCache.objectForKey(points) as? [CGFloat] {
+
             return cachedCurve
         }
 
@@ -166,10 +170,10 @@ extension RGBToneCurveFilter {
         }
 
         // Sort the array.
-        let sortedPoints = points.sort { return $0.X > $1.X }
+        let sortedPoints = points.sort { return $0.X < $1.X }
 
         // Convert from (0, 1) to (0, 255).
-        var convertedPoints = Array(count: sortedPoints.count, repeatedValue: CIVector())
+        var convertedPoints = [CIVector]()
 
         for index in 0..<sortedPoints.count {
             let point = sortedPoints[index]
@@ -185,7 +189,8 @@ extension RGBToneCurveFilter {
 
         if firstSplinePoint.X > 0 {
 
-            for index in (0..<Int(firstSplinePoint.X)).reverse() {
+            for index in (0...Int(firstSplinePoint.X)).reverse() {
+
                 splinePoints.insert(CIVector(x: CGFloat(index), y: 0.0), atIndex: 0)
             }
         }
@@ -200,9 +205,9 @@ extension RGBToneCurveFilter {
         }
 
         // Prepare the spline points.
-        var preparedSplinePoints = Array(count: splinePoints.count, repeatedValue: CGFloat())
+        var preparedSplinePoints = [CGFloat]()
 
-        for index in 0..<preparedSplinePoints.count {
+        for index in 0..<splinePoints.count {
 
             let newPoint = splinePoints[index]
             let origPoint = CIVector(x: newPoint.X, y: newPoint.X)
@@ -233,7 +238,7 @@ extension RGBToneCurveFilter {
         // [points count] is equal to [sdA count]
         let n = sd.count
 
-        var output = Array(count: n+1, repeatedValue: CIVector())
+        var output = [CIVector]()
 
         for index in 0..<n-1 {
 
@@ -307,7 +312,9 @@ extension RGBToneCurveFilter {
 
         // solving pass1 (up->down)
         for index in 1..<n {
-            let k = matrix[index][0]/matrix[index-1][1]
+
+            let k = matrix[index-1][1] == 0 ? 0.0 : matrix[index][0]/matrix[index-1][1]
+
             matrix[index][1] -= k*matrix[index-1][2]
             matrix[index][0] = 0
             result[index] -= k*result[index-1]
@@ -315,18 +322,20 @@ extension RGBToneCurveFilter {
 
         // solving pass2 (down->up)
         
-        for index in (0..<n-2).reverse() {
+        for index in (0...n-2).reverse() {
             
-            let k = matrix[index][2]/matrix[index+1][1]
+            let k = matrix[index+1][1] == 0 ? 0.0 : matrix[index][2]/matrix[index+1][1]
+
             matrix[index][1] -= k*matrix[index+1][0]
             matrix[index][2] = 0
+
             result[index] -= k*result[index+1]
         }
         
-        var output = Array(count: n, repeatedValue: CGFloat())
+        var output = [CGFloat]()
         
         for index in 0..<n {
-            output[index] = result[index]/matrix[index][1]
+            output.append(result[index]/matrix[index][1])
         }
         
         return output

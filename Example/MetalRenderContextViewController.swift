@@ -12,6 +12,7 @@ import Lady
 #if !(arch(i386) || arch(x86_64)) && (os(iOS) || os(watchOS) || os(tvOS))
 import MetalKit
 
+@available(iOS 9.0, *)
 class MetalRenderContextViewController: UIViewController, MTKViewDelegate {
 
     @IBOutlet weak var metalView: MTKView!

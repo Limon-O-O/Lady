@@ -8,8 +8,6 @@
 
 import CoreImage
 
-let defaultCurveControlPoints = [CIVector(x: 0.0, y: 0.0), CIVector(x: 120/255.0, y: 146/255.0), CIVector(x: 1.0, y: 1.0)]
-
 public class HighPassSkinSmoothingFilter: CIFilter {
 
     /**
@@ -30,11 +28,13 @@ public class HighPassSkinSmoothingFilter: CIFilter {
     /**
      A array of `CIVector` that defines the control points of the curve in `Curve Adjustment` step. The default value of this parameter is [(0,0), (120/255.0,146/255.0), (1,1)].
      */
-    public var inputToneCurveControlPoints = defaultCurveControlPoints {
+    public var inputToneCurveControlPoints = HighPassSkinSmoothingFilter.defaultInputToneCurveControlPoints {
         didSet {
-            skinToneCurveFilter.inputRGBCompositeControlPoints = inputToneCurveControlPoints.isEmpty ? defaultCurveControlPoints : inputToneCurveControlPoints
+            skinToneCurveFilter.inputRGBCompositeControlPoints = inputToneCurveControlPoints.isEmpty ? HighPassSkinSmoothingFilter.defaultInputToneCurveControlPoints : inputToneCurveControlPoints
         }
     }
+
+    public static let defaultInputToneCurveControlPoints = [CIVector(x: 0.0, y: 0.0), CIVector(x: 120/255.0, y: 146/255.0), CIVector(x: 1.0, y: 1.0)]
 
     /**
      A number value that controls the sharpness factor of the final `Sharpen` step. The sharpness value is calculated as `inputAmount * inputSharpnessFactor`. The default value for this parameter is 0.6.
@@ -44,7 +44,6 @@ public class HighPassSkinSmoothingFilter: CIFilter {
     override public var outputImage: CIImage? {
 
         guard let unwrappedInputImage = inputImage else { return nil }
-
 
         let maskGenerator = HighPassSkinSmoothingMaskGenerator()
         maskGenerator.inputRadius = inputRadius
@@ -77,19 +76,8 @@ public class HighPassSkinSmoothingFilter: CIFilter {
 
     private lazy var skinToneCurveFilter: RGBToneCurveFilter = {
         let filter = RGBToneCurveFilter()
+        filter.inputRGBCompositeControlPoints = HighPassSkinSmoothingFilter.defaultInputToneCurveControlPoints
         return filter
-    }()
-
-    private static let kernel: CIColorKernel = {
-
-        let shaderPath = NSBundle.mainBundle().pathForResource("\(self)", ofType: "cikernel")
-
-        guard let path = shaderPath, kernelString = try? String(contentsOfFile: path), kernel = CIColorKernel(string: kernelString) else {
-
-            fatalError("Unable to build HighPassFilter Kernel")
-        }
-
-        return kernel
     }()
 
     public override func setDefaults() {
@@ -97,7 +85,7 @@ public class HighPassSkinSmoothingFilter: CIFilter {
         inputRadius = 8.0
         inputAmount = 0.75
         inputSharpnessFactor = 0.6
-        inputToneCurveControlPoints = defaultCurveControlPoints
+        inputToneCurveControlPoints = HighPassSkinSmoothingFilter.defaultInputToneCurveControlPoints
     }
 
 }
