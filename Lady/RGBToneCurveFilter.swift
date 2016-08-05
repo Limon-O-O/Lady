@@ -14,30 +14,28 @@ public class RGBToneCurveFilter: CIFilter {
 
     public var inputIntensity: CGFloat = 1.0
 
-    private static let defaultCurveControlPoints = [CIVector(x: 0.0, y: 0.0), CIVector(x: 0.5, y: 0.5), CIVector(x: 1.0, y: 1.0)]
-
-    var inputRedControlPoints = RGBToneCurveFilter.defaultCurveControlPoints {
+    var inputRedControlPoints = defaultCurveControlPoints {
         didSet {
             redCurve = []
             toneCurveTexture = nil
         }
     }
 
-    var inputGreenControlPoints = RGBToneCurveFilter.defaultCurveControlPoints {
+    var inputGreenControlPoints = defaultCurveControlPoints {
         didSet {
             greenCurve = []
             toneCurveTexture = nil
         }
     }
 
-    var inputBlueControlPoints = RGBToneCurveFilter.defaultCurveControlPoints {
+    var inputBlueControlPoints = defaultCurveControlPoints {
         didSet {
             blueCurve = []
             toneCurveTexture = nil
         }
     }
 
-    var inputRGBCompositeControlPoints = RGBToneCurveFilter.defaultCurveControlPoints {
+    var inputRGBCompositeControlPoints = defaultCurveControlPoints {
         didSet {
             rgbCompositeCurve = []
             toneCurveTexture = nil
@@ -133,10 +131,10 @@ public class RGBToneCurveFilter: CIFilter {
 
     public override func setDefaults() {
 
-        inputRedControlPoints = RGBToneCurveFilter.defaultCurveControlPoints
-        inputGreenControlPoints = RGBToneCurveFilter.defaultCurveControlPoints
-        inputBlueControlPoints = RGBToneCurveFilter.defaultCurveControlPoints
-        inputRGBCompositeControlPoints = RGBToneCurveFilter.defaultCurveControlPoints
+        inputRedControlPoints = defaultCurveControlPoints
+        inputGreenControlPoints = defaultCurveControlPoints
+        inputBlueControlPoints = defaultCurveControlPoints
+        inputRGBCompositeControlPoints = defaultCurveControlPoints
 
         inputIntensity = 1.0
 

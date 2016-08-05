@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		ED23AC301D51BF7E00E441A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED23AC2F1D51BF7E00E441A9 /* AppDelegate.swift */; };
-		ED23AC321D51BF7E00E441A9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED23AC311D51BF7E00E441A9 /* ViewController.swift */; };
 		ED23AC351D51BF7E00E441A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED23AC331D51BF7E00E441A9 /* Main.storyboard */; };
 		ED23AC371D51BF7E00E441A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED23AC361D51BF7E00E441A9 /* Assets.xcassets */; };
 		ED23AC3A1D51BF7E00E441A9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED23AC381D51BF7E00E441A9 /* LaunchScreen.storyboard */; };
@@ -25,6 +24,11 @@
 		EDAB85D11D53367A0019D33A /* GreenBlueChannelOverlayBlendFilter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = EDAB85D01D53367A0019D33A /* GreenBlueChannelOverlayBlendFilter.cikernel */; };
 		EDAB85D31D53373A0019D33A /* HighPassSkinSmoothingMaskBoostFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAB85D21D53373A0019D33A /* HighPassSkinSmoothingMaskBoostFilter.swift */; };
 		EDAB85D51D5337700019D33A /* HighPassSkinSmoothingMaskBoostFilter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = EDAB85D41D5337700019D33A /* HighPassSkinSmoothingMaskBoostFilter.cikernel */; };
+		EDDA941B1D54875500C0F3B6 /* HighPassSkinSmoothingMaskGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDA941A1D54875500C0F3B6 /* HighPassSkinSmoothingMaskGenerator.swift */; };
+		EDDA94201D54A8A200C0F3B6 /* MainTableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDA941C1D54A8A200C0F3B6 /* MainTableTableViewController.swift */; };
+		EDDA94211D54A8A200C0F3B6 /* DefaultRenderContextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDA941D1D54A8A200C0F3B6 /* DefaultRenderContextViewController.swift */; };
+		EDDA94221D54A8A200C0F3B6 /* OpenGLRenderContextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDA941E1D54A8A200C0F3B6 /* OpenGLRenderContextViewController.swift */; };
+		EDDA94231D54A8A200C0F3B6 /* MetalRenderContextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDA941F1D54A8A200C0F3B6 /* MetalRenderContextViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,7 +58,6 @@
 /* Begin PBXFileReference section */
 		ED23AC2C1D51BF7E00E441A9 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED23AC2F1D51BF7E00E441A9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		ED23AC311D51BF7E00E441A9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		ED23AC341D51BF7E00E441A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		ED23AC361D51BF7E00E441A9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ED23AC391D51BF7E00E441A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -72,6 +75,11 @@
 		EDAB85D01D53367A0019D33A /* GreenBlueChannelOverlayBlendFilter.cikernel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GreenBlueChannelOverlayBlendFilter.cikernel; sourceTree = "<group>"; };
 		EDAB85D21D53373A0019D33A /* HighPassSkinSmoothingMaskBoostFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighPassSkinSmoothingMaskBoostFilter.swift; sourceTree = "<group>"; };
 		EDAB85D41D5337700019D33A /* HighPassSkinSmoothingMaskBoostFilter.cikernel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = HighPassSkinSmoothingMaskBoostFilter.cikernel; sourceTree = "<group>"; };
+		EDDA941A1D54875500C0F3B6 /* HighPassSkinSmoothingMaskGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighPassSkinSmoothingMaskGenerator.swift; sourceTree = "<group>"; };
+		EDDA941C1D54A8A200C0F3B6 /* MainTableTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableTableViewController.swift; sourceTree = "<group>"; };
+		EDDA941D1D54A8A200C0F3B6 /* DefaultRenderContextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultRenderContextViewController.swift; sourceTree = "<group>"; };
+		EDDA941E1D54A8A200C0F3B6 /* OpenGLRenderContextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenGLRenderContextViewController.swift; sourceTree = "<group>"; };
+		EDDA941F1D54A8A200C0F3B6 /* MetalRenderContextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetalRenderContextViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,7 +123,10 @@
 			isa = PBXGroup;
 			children = (
 				ED23AC2F1D51BF7E00E441A9 /* AppDelegate.swift */,
-				ED23AC311D51BF7E00E441A9 /* ViewController.swift */,
+				EDDA941C1D54A8A200C0F3B6 /* MainTableTableViewController.swift */,
+				EDDA941D1D54A8A200C0F3B6 /* DefaultRenderContextViewController.swift */,
+				EDDA941E1D54A8A200C0F3B6 /* OpenGLRenderContextViewController.swift */,
+				EDDA941F1D54A8A200C0F3B6 /* MetalRenderContextViewController.swift */,
 				ED23AC331D51BF7E00E441A9 /* Main.storyboard */,
 				ED23AC361D51BF7E00E441A9 /* Assets.xcassets */,
 				ED23AC381D51BF7E00E441A9 /* LaunchScreen.storyboard */,
@@ -139,6 +150,7 @@
 				EDAB85D01D53367A0019D33A /* GreenBlueChannelOverlayBlendFilter.cikernel */,
 				EDAB85D21D53373A0019D33A /* HighPassSkinSmoothingMaskBoostFilter.swift */,
 				EDAB85D41D5337700019D33A /* HighPassSkinSmoothingMaskBoostFilter.cikernel */,
+				EDDA941A1D54875500C0F3B6 /* HighPassSkinSmoothingMaskGenerator.swift */,
 			);
 			path = Lady;
 			sourceTree = "<group>";
@@ -260,8 +272,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED23AC321D51BF7E00E441A9 /* ViewController.swift in Sources */,
+				EDDA94231D54A8A200C0F3B6 /* MetalRenderContextViewController.swift in Sources */,
+				EDDA94211D54A8A200C0F3B6 /* DefaultRenderContextViewController.swift in Sources */,
 				ED23AC301D51BF7E00E441A9 /* AppDelegate.swift in Sources */,
+				EDDA94201D54A8A200C0F3B6 /* MainTableTableViewController.swift in Sources */,
+				EDDA94221D54A8A200C0F3B6 /* OpenGLRenderContextViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,6 +286,7 @@
 			files = (
 				EDAB85D31D53373A0019D33A /* HighPassSkinSmoothingMaskBoostFilter.swift in Sources */,
 				ED23AC541D51BFDF00E441A9 /* FilterConstructor.swift in Sources */,
+				EDDA941B1D54875500C0F3B6 /* HighPassSkinSmoothingMaskGenerator.swift in Sources */,
 				ED6EE7CF1D52231F006D678E /* HighPassFilter.swift in Sources */,
 				EDAB85CD1D5334EB0019D33A /* HighPassSkinSmoothingFilter.swift in Sources */,
 				EDAB85CF1D5335FC0019D33A /* GreenBlueChannelOverlayBlendFilter.swift in Sources */,
