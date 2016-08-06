@@ -29,7 +29,6 @@ class OpenGLRenderContextViewController: GLKViewController {
         let eaglContext = EAGLContext(API: .OpenGLES2)
 
         context = {
-            let eaglContext = EAGLContext(API: .OpenGLES2)
             return CIContext(EAGLContext: eaglContext, options: [kCIContextWorkingColorSpace: CGColorSpaceCreateDeviceRGB()!])
         }()
 

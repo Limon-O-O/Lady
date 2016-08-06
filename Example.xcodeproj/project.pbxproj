@@ -16,14 +16,14 @@
 		ED23AC4E1D51BFB400E441A9 /* Lady.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ED23AC461D51BFB400E441A9 /* Lady.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		ED23AC541D51BFDF00E441A9 /* FilterConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED23AC531D51BFDF00E441A9 /* FilterConstructor.swift */; };
 		ED23AC561D51C17800E441A9 /* RGBToneCurveFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED23AC551D51C17800E441A9 /* RGBToneCurveFilter.swift */; };
-		ED6EE7CD1D5221B2006D678E /* RGBToneCurveFilter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = ED6EE7CC1D5221B2006D678E /* RGBToneCurveFilter.cikernel */; };
+		ED3BED581D56325000007787 /* GreenBlueChannelOverlayBlendFilter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = ED3BED541D56325000007787 /* GreenBlueChannelOverlayBlendFilter.cikernel */; };
+		ED3BED591D56325000007787 /* HighPassFilter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = ED3BED551D56325000007787 /* HighPassFilter.cikernel */; };
+		ED3BED5A1D56325000007787 /* HighPassSkinSmoothingMaskBoostFilter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = ED3BED561D56325000007787 /* HighPassSkinSmoothingMaskBoostFilter.cikernel */; };
+		ED3BED5B1D56325000007787 /* RGBToneCurveFilter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = ED3BED571D56325000007787 /* RGBToneCurveFilter.cikernel */; };
 		ED6EE7CF1D52231F006D678E /* HighPassFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6EE7CE1D52231F006D678E /* HighPassFilter.swift */; };
-		ED6EE7D11D5223A9006D678E /* HighPassFilter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = ED6EE7D01D5223A9006D678E /* HighPassFilter.cikernel */; };
 		EDAB85CD1D5334EB0019D33A /* HighPassSkinSmoothingFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAB85CC1D5334EB0019D33A /* HighPassSkinSmoothingFilter.swift */; };
 		EDAB85CF1D5335FC0019D33A /* GreenBlueChannelOverlayBlendFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAB85CE1D5335FC0019D33A /* GreenBlueChannelOverlayBlendFilter.swift */; };
-		EDAB85D11D53367A0019D33A /* GreenBlueChannelOverlayBlendFilter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = EDAB85D01D53367A0019D33A /* GreenBlueChannelOverlayBlendFilter.cikernel */; };
 		EDAB85D31D53373A0019D33A /* HighPassSkinSmoothingMaskBoostFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAB85D21D53373A0019D33A /* HighPassSkinSmoothingMaskBoostFilter.swift */; };
-		EDAB85D51D5337700019D33A /* HighPassSkinSmoothingMaskBoostFilter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = EDAB85D41D5337700019D33A /* HighPassSkinSmoothingMaskBoostFilter.cikernel */; };
 		EDDA941B1D54875500C0F3B6 /* HighPassSkinSmoothingMaskGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDA941A1D54875500C0F3B6 /* HighPassSkinSmoothingMaskGenerator.swift */; };
 		EDDA94201D54A8A200C0F3B6 /* MainTableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDA941C1D54A8A200C0F3B6 /* MainTableTableViewController.swift */; };
 		EDDA94211D54A8A200C0F3B6 /* DefaultRenderContextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDA941D1D54A8A200C0F3B6 /* DefaultRenderContextViewController.swift */; };
@@ -67,14 +67,14 @@
 		ED23AC4A1D51BFB400E441A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED23AC531D51BFDF00E441A9 /* FilterConstructor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterConstructor.swift; sourceTree = "<group>"; };
 		ED23AC551D51C17800E441A9 /* RGBToneCurveFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGBToneCurveFilter.swift; sourceTree = "<group>"; };
-		ED6EE7CC1D5221B2006D678E /* RGBToneCurveFilter.cikernel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = RGBToneCurveFilter.cikernel; sourceTree = "<group>"; };
+		ED3BED541D56325000007787 /* GreenBlueChannelOverlayBlendFilter.cikernel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GreenBlueChannelOverlayBlendFilter.cikernel; sourceTree = "<group>"; };
+		ED3BED551D56325000007787 /* HighPassFilter.cikernel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = HighPassFilter.cikernel; sourceTree = "<group>"; };
+		ED3BED561D56325000007787 /* HighPassSkinSmoothingMaskBoostFilter.cikernel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = HighPassSkinSmoothingMaskBoostFilter.cikernel; sourceTree = "<group>"; };
+		ED3BED571D56325000007787 /* RGBToneCurveFilter.cikernel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = RGBToneCurveFilter.cikernel; sourceTree = "<group>"; };
 		ED6EE7CE1D52231F006D678E /* HighPassFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighPassFilter.swift; sourceTree = "<group>"; };
-		ED6EE7D01D5223A9006D678E /* HighPassFilter.cikernel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = HighPassFilter.cikernel; sourceTree = "<group>"; };
 		EDAB85CC1D5334EB0019D33A /* HighPassSkinSmoothingFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighPassSkinSmoothingFilter.swift; sourceTree = "<group>"; };
 		EDAB85CE1D5335FC0019D33A /* GreenBlueChannelOverlayBlendFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GreenBlueChannelOverlayBlendFilter.swift; sourceTree = "<group>"; };
-		EDAB85D01D53367A0019D33A /* GreenBlueChannelOverlayBlendFilter.cikernel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GreenBlueChannelOverlayBlendFilter.cikernel; sourceTree = "<group>"; };
 		EDAB85D21D53373A0019D33A /* HighPassSkinSmoothingMaskBoostFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighPassSkinSmoothingMaskBoostFilter.swift; sourceTree = "<group>"; };
-		EDAB85D41D5337700019D33A /* HighPassSkinSmoothingMaskBoostFilter.cikernel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = HighPassSkinSmoothingMaskBoostFilter.cikernel; sourceTree = "<group>"; };
 		EDDA941A1D54875500C0F3B6 /* HighPassSkinSmoothingMaskGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighPassSkinSmoothingMaskGenerator.swift; sourceTree = "<group>"; };
 		EDDA941C1D54A8A200C0F3B6 /* MainTableTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableTableViewController.swift; sourceTree = "<group>"; };
 		EDDA941D1D54A8A200C0F3B6 /* DefaultRenderContextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultRenderContextViewController.swift; sourceTree = "<group>"; };
@@ -142,17 +142,25 @@
 				ED23AC4A1D51BFB400E441A9 /* Info.plist */,
 				ED23AC531D51BFDF00E441A9 /* FilterConstructor.swift */,
 				EDAB85CC1D5334EB0019D33A /* HighPassSkinSmoothingFilter.swift */,
-				ED23AC551D51C17800E441A9 /* RGBToneCurveFilter.swift */,
-				ED6EE7CC1D5221B2006D678E /* RGBToneCurveFilter.cikernel */,
 				ED6EE7CE1D52231F006D678E /* HighPassFilter.swift */,
-				ED6EE7D01D5223A9006D678E /* HighPassFilter.cikernel */,
+				ED23AC551D51C17800E441A9 /* RGBToneCurveFilter.swift */,
 				EDAB85CE1D5335FC0019D33A /* GreenBlueChannelOverlayBlendFilter.swift */,
-				EDAB85D01D53367A0019D33A /* GreenBlueChannelOverlayBlendFilter.cikernel */,
 				EDAB85D21D53373A0019D33A /* HighPassSkinSmoothingMaskBoostFilter.swift */,
-				EDAB85D41D5337700019D33A /* HighPassSkinSmoothingMaskBoostFilter.cikernel */,
 				EDDA941A1D54875500C0F3B6 /* HighPassSkinSmoothingMaskGenerator.swift */,
+				ED3BED531D56325000007787 /* Resources */,
 			);
 			path = Lady;
+			sourceTree = "<group>";
+		};
+		ED3BED531D56325000007787 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				ED3BED541D56325000007787 /* GreenBlueChannelOverlayBlendFilter.cikernel */,
+				ED3BED551D56325000007787 /* HighPassFilter.cikernel */,
+				ED3BED561D56325000007787 /* HighPassSkinSmoothingMaskBoostFilter.cikernel */,
+				ED3BED571D56325000007787 /* RGBToneCurveFilter.cikernel */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,10 +266,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED6EE7CD1D5221B2006D678E /* RGBToneCurveFilter.cikernel in Resources */,
-				EDAB85D51D5337700019D33A /* HighPassSkinSmoothingMaskBoostFilter.cikernel in Resources */,
-				ED6EE7D11D5223A9006D678E /* HighPassFilter.cikernel in Resources */,
-				EDAB85D11D53367A0019D33A /* GreenBlueChannelOverlayBlendFilter.cikernel in Resources */,
+				ED3BED581D56325000007787 /* GreenBlueChannelOverlayBlendFilter.cikernel in Resources */,
+				ED3BED591D56325000007787 /* HighPassFilter.cikernel in Resources */,
+				ED3BED5B1D56325000007787 /* RGBToneCurveFilter.cikernel in Resources */,
+				ED3BED5A1D56325000007787 /* HighPassSkinSmoothingMaskBoostFilter.cikernel in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,7 +456,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				OTHER_SWIFT_FLAGS = "-Xfrontend -debug-time-function-bodies";
+				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = top.limon.Lady;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -472,7 +480,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				OTHER_SWIFT_FLAGS = "-Xfrontend -debug-time-function-bodies";
+				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = top.limon.Lady;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
