@@ -5,7 +5,9 @@
 <a href="https://raw.githubusercontent.com/Limon-O-O/Lady/master/LICENSE"><img src="https://img.shields.io/cocoapods/l/Lady.svg?style=flat"></a>
 </p>
 
-[YUCIHighPassSkinSmoothing](https://github.com/YuAo/YUCIHighPassSkinSmoothing) in Swift.
+Lady is [YUCIHighPassSkinSmoothing](https://github.com/YuAo/YUCIHighPassSkinSmoothing) in Swift.
+
+YUCIHighPassSkinSmoothing is an implementation of [High Pass Skin Smoothing](https://www.google.com.hk/#newwindow=1&safe=strict&q=High+Pass+Skin+Smoothing) using CoreImage.framework
 
 ## Previews
 ![Preview 1](http://yuao.github.io/YUCIHighPassSkinSmoothing/previews/1.jpg)
