@@ -15,41 +15,47 @@ import MetalKit
 @available(iOS 9.0, *)
 class MetalRenderContextViewController: UIViewController, MTKViewDelegate {
 
-    @IBOutlet weak var metalView: MTKView!
+    @IBOutlet private weak var metalView: MTKView!
     
-    var context: CIContext!
-    var commandQueue: MTLCommandQueue!
-    var inputTexture: MTLTexture!
+    private var context: CIContext!
+    private var commandQueue: MTLCommandQueue!
+    private var inputTexture: MTLTexture!
+
+    private let filter = HighPassSkinSmoothingFilter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let device = MTLCreateSystemDefaultDevice()!
-        self.metalView.device = device
-        self.metalView.delegate = self
-        self.metalView.framebufferOnly = false
-        self.metalView.enableSetNeedsDisplay = true
+        metalView.device = device
+        metalView.delegate = self
+        metalView.framebufferOnly = false
+        metalView.enableSetNeedsDisplay = true
  
-        self.context = CIContext(MTLDevice: device, options: [kCIContextWorkingColorSpace:CGColorSpaceCreateDeviceRGB()!])
-        self.commandQueue = device.newCommandQueue()
+        context = CIContext(MTLDevice: device, options: [kCIContextWorkingColorSpace:CGColorSpaceCreateDeviceRGB()!])
+        commandQueue = device.newCommandQueue()
         
-        self.inputTexture = try! MTKTextureLoader(device: self.metalView.device!).newTextureWithCGImage(UIImage(named: "SampleImage")!.CGImage!, options: nil)
+        inputTexture = try! MTKTextureLoader(device: self.metalView.device!).newTextureWithCGImage(UIImage(named: "SampleImage")!.CGImage!, options: nil)
     }
 
     func drawInMTKView(view: MTKView) {
-        let commandBuffer = self.commandQueue.commandBuffer()
+
+        let commandBuffer = commandQueue.commandBuffer()
         
         let inputCIImage = CIImage(MTLTexture: inputTexture, options: nil)
-        let filter = CIFilter(name: "YUCIHighPassSkinSmoothing")!
-        filter.setValue(inputCIImage, forKey: kCIInputImageKey)
-        filter.setValue(0.7, forKey: "inputAmount")
-        filter.setValue(7.0 * inputCIImage.extent.width/750.0, forKey: kCIInputRadiusKey)
+
+        filter.inputImage = inputCIImage
+        filter.inputAmount = 0.7
+        filter.inputRadius = 7.0 * inputCIImage.extent.width/750.0
+
         let outputCIImage = filter.outputImage!
         
         let cs = CGColorSpaceCreateDeviceRGB()!
         let outputTexture = view.currentDrawable?.texture
-        self.context.render(outputCIImage, toMTLTexture: outputTexture!,
+
+        context.render(outputCIImage, toMTLTexture: outputTexture!,
             commandBuffer: commandBuffer, bounds: outputCIImage.extent, colorSpace: cs)
+
         commandBuffer.presentDrawable(view.currentDrawable!)
         commandBuffer.commit()
     }
@@ -62,7 +68,7 @@ class MetalRenderContextViewController: UIViewController, MTKViewDelegate {
 #else
 
 class MetalRenderContextViewController: UIViewController {
-    @IBOutlet weak var metalView: UIView!
+    @IBOutlet private weak var metalView: UIView!
 }
 
 #endif

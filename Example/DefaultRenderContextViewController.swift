@@ -8,41 +8,31 @@
 
 import UIKit
 import Lady
+import MobileCoreServices.UTType
 
-class DefaultRenderContextViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
-    
-    let context = CIContext(options: [kCIContextWorkingColorSpace: CGColorSpaceCreateDeviceRGB()!])
-    let filter = HighPassSkinSmoothingFilter()
-    
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var amountSlider: UISlider!
+class DefaultRenderContextViewController: UIViewController {
 
-    var sourceImage: UIImage! {
+    private let context: CIContext = {
+        let eaglContext = EAGLContext(API: .OpenGLES2)
+        let options = [kCIContextWorkingColorSpace: CGColorSpaceCreateDeviceRGB()!]
+        return CIContext(EAGLContext: eaglContext, options: options)
+    }()
+
+    private let filter = HighPassSkinSmoothingFilter()
+    
+    @IBOutlet private weak var imageView: UIImageView!
+
+    @IBOutlet private weak var amountSlider: UISlider!
+
+    private var sourceImage: UIImage! {
         didSet {
             self.inputCIImage = CIImage(CGImage: self.sourceImage.CGImage!)
         }
     }
 
-    var processedImage: UIImage?
+    private var processedImage: UIImage?
     
-    var inputCIImage: CIImage!
-    
-    @IBAction func chooseImageBarButtonItemTapped(sender: AnyObject) {
-        let imagePickerController = UIImagePickerController()
-        imagePickerController.view.backgroundColor = UIColor.whiteColor()
-        imagePickerController.delegate = self
-        self.presentViewController(imagePickerController, animated: true, completion: nil)
-    }
-    
-    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
-        self.dismissViewControllerAnimated(true, completion: nil)
-        self.sourceImage = image
-        self.processImage(byInputAmount: self.amountSlider.value)
-    }
+    private var inputCIImage: CIImage!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,15 +40,15 @@ class DefaultRenderContextViewController: UIViewController,UIImagePickerControll
         self.processImage(byInputAmount: self.amountSlider.value)
     }
 
-    @IBAction func amountSliderTouchUp(sender: UISlider) {
+    @IBAction private func amountSliderTouchUp(sender: UISlider) {
         self.processImage(byInputAmount: sender.value)
     }
 
-    func processImage(byInputAmount inputAmount: Float) {
+    private func processImage(byInputAmount inputAmount: Float) {
 
-        self.filter.inputImage = inputCIImage
-        self.filter.inputAmount = CGFloat(inputAmount)
-        self.filter.inputRadius = 7.0 * inputCIImage.extent.width/750.0
+        filter.inputImage = inputCIImage
+        filter.inputAmount = CGFloat(inputAmount)
+        filter.inputRadius = 7.0 * inputCIImage.extent.width/750.0
 
         let outputCIImage = filter.outputImage!
 
@@ -69,11 +59,39 @@ class DefaultRenderContextViewController: UIViewController,UIImagePickerControll
         self.imageView.image = outputUIImage
     }
     
-    @IBAction func handleImageViewLongPress(sender: UILongPressGestureRecognizer) {
+    @IBAction private func handleImageViewLongPress(sender: UILongPressGestureRecognizer) {
         if sender.state == .Began {
             self.imageView.image = self.sourceImage
         } else if (sender.state == .Ended || sender.state == .Cancelled) {
             self.imageView.image = self.processedImage
         }
+    }
+
+    @IBAction private func chooseImageBarButtonItemTapped(sender: AnyObject) {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.view.backgroundColor = UIColor.whiteColor()
+        imagePickerController.delegate = self
+        self.presentViewController(imagePickerController, animated: true, completion: nil)
+    }
+}
+
+extension DefaultRenderContextViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+
+        if let mediaType = info[UIImagePickerControllerMediaType] as? String {
+
+            switch mediaType {
+            case String(kUTTypeImage):
+                if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+                    self.sourceImage = image
+                    self.processImage(byInputAmount: self.amountSlider.value)
+                }
+            default:
+                break
+            }
+        }
+
+        dismissViewControllerAnimated(true, completion: nil)
     }
 }

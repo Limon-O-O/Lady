@@ -9,42 +9,46 @@
 import UIKit
 import GLKit
 import Lady
-import AVFoundation
+import AVFoundation.AVUtilities
 
 class OpenGLRenderContextViewController: GLKViewController {
-    
-    var context : EAGLContext!
-    var ciContext : CIContext!
-    
-    var glkView: GLKView! { return self.view as! GLKView }
-    
-    var startDate: NSDate = NSDate()
-    
-    var filter = HighPassSkinSmoothingFilter()
-    
-    var inputCIImage = CIImage(CGImage: UIImage(named: "SampleImage")!.CGImage!)
-    
+
+    private var context: CIContext!
+
+    private var glkView: GLKView! { return self.view as! GLKView }
+
+    private var startDate: NSDate = NSDate()
+
+    private var filter = HighPassSkinSmoothingFilter()
+
+    private var inputCIImage = CIImage(CGImage: UIImage(named: "SampleImage")!.CGImage!)
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        let colorSpace = CGColorSpaceCreateDeviceRGB()!
-        self.context = EAGLContext(API: .OpenGLES2)
-        self.ciContext = CIContext(EAGLContext: self.context, options: [kCIContextWorkingColorSpace: colorSpace])
-        self.glkView.context = self.context
+
+        let eaglContext = EAGLContext(API: .OpenGLES2)
+
+        context = {
+            let eaglContext = EAGLContext(API: .OpenGLES2)
+            return CIContext(EAGLContext: eaglContext, options: [kCIContextWorkingColorSpace: CGColorSpaceCreateDeviceRGB()!])
+        }()
+
+        glkView.context = eaglContext
     }
-    
+
     override func glkView(view: GLKView, drawInRect rect: CGRect) {
 
         let amount = abs(sin(NSDate().timeIntervalSinceDate(self.startDate)) * 0.7)
 
-        self.title = String(format: "Input Amount: %.3f", amount)
+        title = String(format: "Input Amount: %.3f", amount)
 
-        self.filter.inputImage = self.inputCIImage
-        self.filter.inputAmount = CGFloat(amount)
-        self.filter.inputRadius = 7.0 * self.inputCIImage.extent.width/750.0
-        self.filter.inputSharpnessFactor = 0
+        filter.inputImage = inputCIImage
+        filter.inputAmount = CGFloat(amount)
+        filter.inputRadius = 7.0 * inputCIImage.extent.width/750.0
+        filter.inputSharpnessFactor = 0
 
-        let outputCIImage = self.filter.outputImage!
+        let outputCIImage = filter.outputImage!
         
-        self.ciContext.drawImage(outputCIImage, inRect: AVMakeRectWithAspectRatioInsideRect(outputCIImage.extent.size, CGRectApplyAffineTransform(self.view.bounds, CGAffineTransformMakeScale(UIScreen.mainScreen().scale, UIScreen.mainScreen().scale))), fromRect: outputCIImage.extent)
+        context.drawImage(outputCIImage, inRect: AVMakeRectWithAspectRatioInsideRect(outputCIImage.extent.size, CGRectApplyAffineTransform(self.view.bounds, CGAffineTransformMakeScale(UIScreen.mainScreen().scale, UIScreen.mainScreen().scale))), fromRect: outputCIImage.extent)
     }
 }
