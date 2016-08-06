@@ -247,21 +247,26 @@ extension RGBToneCurveFilter {
 
             for x in Int(cur.X)..<Int(next.X) {
 
-                let t = (CGFloat(x)-cur.X)/(next.X-cur.X)
+                let t: CGFloat = (CGFloat(x) - cur.X) / (next.X - cur.X)
 
-                let a = 1-t
+                let a = 1.0 - t
                 let b = t
-                let h = next.X-cur.X
+                let h = next.X - cur.X
 
-                let part1 = a * cur.Y + b * next.Y
-                let part2 = (h * h / 6)
-                let part3 = ((a * a * a - a) * sd[index] + (b * b * b - b) * sd[index+1])
+                // build time optimizations
+                let part1: CGFloat = a * cur.Y + b * next.Y
+                let part2: CGFloat = (h * h / 6.0)
+                let part3: CGFloat = (a * a * a - a) * sd[index]
+                let part4: CGFloat = (b * b * b - b) * sd[index+1]
+                let part5: CGFloat = (part3 + part4)
 
-                var y = part1 + part2 * part3
+                var y = part1 + part2 * part5
                 y = min(y, 255.0)
                 y = max(y, 0.0)
 
-                output.append(CIVector(x: CGFloat(x), y: y))
+                let newPoint = CIVector(x: CGFloat(x), y: y)
+
+                output.append(newPoint)
             }
         }
 
@@ -295,9 +300,9 @@ extension RGBToneCurveFilter {
             let P2 = points[index]
             let P3 = points[index+1]
 
-            matrix[index][0] = (P2.X-P1.X)/6
-            matrix[index][1] = (P3.X-P1.X)/3
-            matrix[index][2] = (P3.X-P2.X)/6
+            matrix[index][0] = (P2.X-P1.X) / 6.0
+            matrix[index][1] = (P3.X-P1.X) / 3.0
+            matrix[index][2] = (P3.X-P2.X) / 6.0
             result[index] = (P3.Y-P2.Y)/(P3.X-P2.X) - (P2.Y-P1.Y)/(P2.X-P1.X)
         }
 
@@ -313,29 +318,32 @@ extension RGBToneCurveFilter {
         // solving pass1 (up->down)
         for index in 1..<n {
 
-            let k = matrix[index-1][1] == 0 ? 0.0 : matrix[index][0]/matrix[index-1][1]
+            let denominator = matrix[index-1][1]
+            let k: CGFloat = denominator == 0.0 ? 0.0 : matrix[index][0] / denominator
 
-            matrix[index][1] -= k*matrix[index-1][2]
-            matrix[index][0] = 0
-            result[index] -= k*result[index-1]
+            matrix[index][1] -= k * matrix[index-1][2]
+            matrix[index][0] = 0.0
+            result[index] -= k * result[index-1]
         }
 
         // solving pass2 (down->up)
-        
         for index in (0...n-2).reverse() {
-            
-            let k = matrix[index+1][1] == 0 ? 0.0 : matrix[index][2]/matrix[index+1][1]
 
-            matrix[index][1] -= k*matrix[index+1][0]
-            matrix[index][2] = 0
+            let denominator = matrix[index+1][1]
+            let k: CGFloat = denominator == 0.0 ? 0.0 : matrix[index][2] / denominator
 
-            result[index] -= k*result[index+1]
+            matrix[index][1] -= k * matrix[index+1][0]
+            matrix[index][2] = 0.0
+
+            result[index] -= k * result[index+1]
         }
         
         var output = [CGFloat]()
         
         for index in 0..<n {
-            output.append(result[index]/matrix[index][1])
+            let denominator = matrix[index][1]
+            let value = matrix[index][1] == 0.0 ? 0.0 : result[index] / denominator
+            output.append(value)
         }
         
         return output
