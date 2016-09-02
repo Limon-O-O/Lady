@@ -55,8 +55,14 @@ public class HighPassSkinSmoothingFilter: CIFilter {
         guard let blendWithMaskFilter = CIFilter(name: "CIBlendWithMask") else { return nil }
 
         blendWithMaskFilter.setValue(unwrappedInputImage, forKey: kCIInputImageKey)
-        blendWithMaskFilter.setValue(skinToneCurveFilter.outputImage, forKey: kCIInputBackgroundImageKey)
-        blendWithMaskFilter.setValue(maskGenerator.outputImage, forKey: kCIInputMaskImageKey)
+
+        if let skinToneCurveFilterOutImage = skinToneCurveFilter.outputImage {
+            blendWithMaskFilter.setValue(skinToneCurveFilterOutImage, forKey: kCIInputBackgroundImageKey)
+        }
+
+        if let skinSmoothingOutImage = maskGenerator.outputImage {
+            blendWithMaskFilter.setValue(skinSmoothingOutImage, forKey: kCIInputMaskImageKey)
+        }
 
         let sharpnessValue = inputSharpnessFactor * inputAmount
 

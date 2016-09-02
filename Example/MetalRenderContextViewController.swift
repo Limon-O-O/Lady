@@ -25,8 +25,8 @@ class MetalRenderContextViewController: UIViewController, MTKViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let device = MTLCreateSystemDefaultDevice()!
+
+        guard let device = MTLCreateSystemDefaultDevice() else { return }
         metalView.device = device
         metalView.delegate = self
         metalView.framebufferOnly = false
