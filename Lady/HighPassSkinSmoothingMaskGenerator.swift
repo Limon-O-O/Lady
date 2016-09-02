@@ -28,7 +28,7 @@ class HighPassSkinSmoothingMaskGenerator {
 
         let highPassFilter = HighPassFilter()
         highPassFilter.inputImage = channelOverlayFilter.outputImage
-        highPassFilter.inputRadius = inputRadius
+        highPassFilter.radius = inputRadius
 
         let hardLightFilter = HighPassSkinSmoothingMaskBoostFilter()
         hardLightFilter.inputImage = highPassFilter.outputImage

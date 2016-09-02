@@ -8,13 +8,11 @@
 
 import CoreImage
 
-public class RGBToneCurveFilter: CIFilter {
+class RGBToneCurveFilter: CIFilter {
 
-    public var inputImage: CIImage?
+    var inputImage: CIImage?
 
-    public var inputIntensity: CGFloat = 1.0
-
-    public static let defaultCurveControlPoints = [CIVector(x: 0.0, y: 0.0), CIVector(x: 0.5, y: 0.5), CIVector(x: 1.0, y: 1.0)]
+    var inputIntensity: CGFloat = 1.0
 
     var inputRedControlPoints = RGBToneCurveFilter.defaultCurveControlPoints {
         didSet {
@@ -44,6 +42,8 @@ public class RGBToneCurveFilter: CIFilter {
         }
     }
 
+    private static let defaultCurveControlPoints = [CIVector(x: 0.0, y: 0.0), CIVector(x: 0.5, y: 0.5), CIVector(x: 1.0, y: 1.0)]
+
     private var toneCurveTexture: CIImage?
 
     private var redCurve = [CGFloat](), greenCurve = [CGFloat](), blueCurve = [CGFloat](), rgbCompositeCurve = [CGFloat]()
@@ -67,7 +67,7 @@ public class RGBToneCurveFilter: CIFilter {
         return cache
     }()
 
-    override public var outputImage: CIImage? {
+    override var outputImage: CIImage? {
 
         guard let unwrappedInputImage = inputImage else { return nil }
 
@@ -132,7 +132,7 @@ public class RGBToneCurveFilter: CIFilter {
         toneCurveTexture = CIImage(bitmapData: data, bytesPerRow: length, size: CGSizeMake(256, 1), format: kCIFormatBGRA8, colorSpace: nil)
     }
 
-    public override func setDefaults() {
+    override func setDefaults() {
 
         inputRedControlPoints = RGBToneCurveFilter.defaultCurveControlPoints
         inputGreenControlPoints = RGBToneCurveFilter.defaultCurveControlPoints
@@ -348,12 +348,9 @@ extension RGBToneCurveFilter {
         
         return output
     }
-
 }
 
-
 private extension UnsafeMutablePointer {
-
     static func calloc<T>(count: Int, initialValue: T) -> UnsafeMutablePointer<T> {
         let ptr = UnsafeMutablePointer<T>.alloc(count)
         ptr.initializeFrom(Repeat(count: count, repeatedValue: initialValue))

@@ -14,7 +14,6 @@
 		ED23AC491D51BFB400E441A9 /* Lady.h in Headers */ = {isa = PBXBuildFile; fileRef = ED23AC481D51BFB400E441A9 /* Lady.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ED23AC4D1D51BFB400E441A9 /* Lady.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED23AC461D51BFB400E441A9 /* Lady.framework */; };
 		ED23AC4E1D51BFB400E441A9 /* Lady.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ED23AC461D51BFB400E441A9 /* Lady.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		ED23AC541D51BFDF00E441A9 /* FilterConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED23AC531D51BFDF00E441A9 /* FilterConstructor.swift */; };
 		ED23AC561D51C17800E441A9 /* RGBToneCurveFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED23AC551D51C17800E441A9 /* RGBToneCurveFilter.swift */; };
 		ED3BED581D56325000007787 /* GreenBlueChannelOverlayBlendFilter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = ED3BED541D56325000007787 /* GreenBlueChannelOverlayBlendFilter.cikernel */; };
 		ED3BED591D56325000007787 /* HighPassFilter.cikernel in Resources */ = {isa = PBXBuildFile; fileRef = ED3BED551D56325000007787 /* HighPassFilter.cikernel */; };
@@ -65,7 +64,6 @@
 		ED23AC461D51BFB400E441A9 /* Lady.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Lady.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED23AC481D51BFB400E441A9 /* Lady.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Lady.h; sourceTree = "<group>"; };
 		ED23AC4A1D51BFB400E441A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		ED23AC531D51BFDF00E441A9 /* FilterConstructor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterConstructor.swift; sourceTree = "<group>"; };
 		ED23AC551D51C17800E441A9 /* RGBToneCurveFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGBToneCurveFilter.swift; sourceTree = "<group>"; };
 		ED3BED541D56325000007787 /* GreenBlueChannelOverlayBlendFilter.cikernel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GreenBlueChannelOverlayBlendFilter.cikernel; sourceTree = "<group>"; };
 		ED3BED551D56325000007787 /* HighPassFilter.cikernel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = HighPassFilter.cikernel; sourceTree = "<group>"; };
@@ -140,7 +138,6 @@
 			children = (
 				ED23AC481D51BFB400E441A9 /* Lady.h */,
 				ED23AC4A1D51BFB400E441A9 /* Info.plist */,
-				ED23AC531D51BFDF00E441A9 /* FilterConstructor.swift */,
 				EDAB85CC1D5334EB0019D33A /* HighPassSkinSmoothingFilter.swift */,
 				ED6EE7CE1D52231F006D678E /* HighPassFilter.swift */,
 				ED23AC551D51C17800E441A9 /* RGBToneCurveFilter.swift */,
@@ -293,7 +290,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDAB85D31D53373A0019D33A /* HighPassSkinSmoothingMaskBoostFilter.swift in Sources */,
-				ED23AC541D51BFDF00E441A9 /* FilterConstructor.swift in Sources */,
 				EDDA941B1D54875500C0F3B6 /* HighPassSkinSmoothingMaskGenerator.swift in Sources */,
 				ED6EE7CF1D52231F006D678E /* HighPassFilter.swift in Sources */,
 				EDAB85CD1D5334EB0019D33A /* HighPassSkinSmoothingFilter.swift in Sources */,
