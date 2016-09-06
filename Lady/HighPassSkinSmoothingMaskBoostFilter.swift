@@ -8,11 +8,11 @@
 
 import CoreImage
 
-class HighPassSkinSmoothingMaskBoostFilter: CIFilter {
+class HighPassSkinSmoothingMaskBoostFilter {
 
     var inputImage: CIImage?
 
-    override var outputImage: CIImage? {
+    var outputImage: CIImage? {
 
         guard let unwrappedInputImage = inputImage else { return nil }
 

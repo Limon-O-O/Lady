@@ -12,13 +12,11 @@ class HighPassSkinSmoothingMaskGenerator {
 
     var inputImage: CIImage?
 
-    var inputRadius: CGFloat = 0.0
+    var inputRadius: Float = 0.0
 
     var outputImage: CIImage? {
 
-        guard let unwrappedInputImage = inputImage else { return nil }
-
-        guard let exposureFilter = CIFilter(name: "CIExposureAdjust") else { return nil }
+        guard let unwrappedInputImage = inputImage, exposureFilter = exposureFilter else { return nil }
 
         exposureFilter.setValue(unwrappedInputImage, forKey: kCIInputImageKey)
         exposureFilter.setValue(-1.0, forKey: kCIInputEVKey)
@@ -28,12 +26,17 @@ class HighPassSkinSmoothingMaskGenerator {
 
         let highPassFilter = HighPassFilter()
         highPassFilter.inputImage = channelOverlayFilter.outputImage
-        highPassFilter.radius = inputRadius
+        highPassFilter.inputRadius = inputRadius
 
         let hardLightFilter = HighPassSkinSmoothingMaskBoostFilter()
         hardLightFilter.inputImage = highPassFilter.outputImage
 
         return hardLightFilter.outputImage
     }
+
+    private lazy var exposureFilter: CIFilter? = {
+        let filter = CIFilter(name: "CIExposureAdjust")
+        return filter
+    }()
 }
 

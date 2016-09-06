@@ -8,12 +8,12 @@
 
 import CoreImage
 
-class HighPassFilter: CIFilter {
+class HighPassFilter {
 
     var inputImage: CIImage?
 
     /// A number value that controls the radius (in pixel) of the filter. The default value of this parameter is 1.0.
-    var radius: CGFloat = 1.0
+    var inputRadius: Float = 1.0
 
     private static let kernel: CIColorKernel = {
 
@@ -27,23 +27,26 @@ class HighPassFilter: CIFilter {
         return kernel
     }()
 
-    override var outputImage: CIImage? {
+    var outputImage: CIImage? {
 
-        guard let unwrappedInputImage = inputImage else { return nil }
-
-        guard let blurFilter = CIFilter(name: "CIGaussianBlur") else { return nil }
+        guard let unwrappedInputImage = inputImage, blurFilter = blurFilter else { return nil }
 
         blurFilter.setValue(unwrappedInputImage.imageByClampingToExtent(), forKey: kCIInputImageKey)
-        blurFilter.setValue(radius, forKey: kCIInputRadiusKey)
+        blurFilter.setValue(inputRadius, forKey: kCIInputRadiusKey)
 
         guard let outputImage = blurFilter.outputImage else { return nil }
 
         return HighPassFilter.kernel.applyWithExtent(unwrappedInputImage.extent, arguments: [unwrappedInputImage, outputImage])
     }
 
-    override func setDefaults() {
+    func setDefaults() {
         inputImage = nil
-        radius = 1.0
+        inputRadius = 1.0
     }
+
+    private lazy var blurFilter: CIFilter? = {
+        let filter = CIFilter(name: "CIGaussianBlur")
+        return filter
+    }()
 
 }

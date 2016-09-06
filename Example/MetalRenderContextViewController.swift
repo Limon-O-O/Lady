@@ -46,7 +46,7 @@ class MetalRenderContextViewController: UIViewController, MTKViewDelegate {
 
         filter.inputImage = inputCIImage
         filter.inputAmount = 0.7
-        filter.inputRadius = 7.0 * inputCIImage.extent.width/750.0
+        filter.inputRadius = Float(7.0 * inputCIImage.extent.width/750.0)
 
         let outputCIImage = filter.outputImage!
         

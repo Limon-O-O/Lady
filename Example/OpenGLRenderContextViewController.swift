@@ -42,8 +42,8 @@ class OpenGLRenderContextViewController: GLKViewController {
         title = String(format: "Input Amount: %.3f", amount)
 
         filter.inputImage = inputCIImage
-        filter.inputAmount = CGFloat(amount)
-        filter.inputRadius = 7.0 * inputCIImage.extent.width/750.0
+        filter.inputAmount = Float(amount)
+        filter.inputRadius = Float(7.0 * inputCIImage.extent.width/750.0)
         filter.inputSharpnessFactor = 0
 
         let outputCIImage = filter.outputImage!

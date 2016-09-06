@@ -47,8 +47,8 @@ class DefaultRenderContextViewController: UIViewController {
     private func processImage(byInputAmount inputAmount: Float) {
 
         filter.inputImage = inputCIImage
-        filter.inputAmount = CGFloat(inputAmount)
-        filter.inputRadius = 7.0 * inputCIImage.extent.width/750.0
+        filter.inputAmount = inputAmount
+        filter.inputRadius = Float(7.0 * inputCIImage.extent.width/750.0)
 
         let outputCIImage = filter.outputImage!
 

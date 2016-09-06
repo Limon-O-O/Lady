@@ -8,11 +8,11 @@
 
 import CoreImage
 
-class RGBToneCurveFilter: CIFilter {
+class RGBToneCurveFilter {
 
     var inputImage: CIImage?
 
-    var inputIntensity: CGFloat = 1.0
+    var inputIntensity: Float = 1.0
 
     var inputRedControlPoints = RGBToneCurveFilter.defaultCurveControlPoints {
         didSet {
@@ -46,7 +46,7 @@ class RGBToneCurveFilter: CIFilter {
 
     private var toneCurveTexture: CIImage?
 
-    private var redCurve = [CGFloat](), greenCurve = [CGFloat](), blueCurve = [CGFloat](), rgbCompositeCurve = [CGFloat]()
+    private var redCurve = [Float](), greenCurve = [Float](), blueCurve = [Float](), rgbCompositeCurve = [Float]()
 
     private static let kernel: CIKernel = {
 
@@ -67,7 +67,7 @@ class RGBToneCurveFilter: CIFilter {
         return cache
     }()
 
-    override var outputImage: CIImage? {
+    var outputImage: CIImage? {
 
         guard let unwrappedInputImage = inputImage else { return nil }
 
@@ -80,7 +80,7 @@ class RGBToneCurveFilter: CIFilter {
         let arguments = [
             unwrappedInputImage,
             unwrappedToneCurveTexture,
-            self.inputIntensity
+            inputIntensity
         ]
 
         return RGBToneCurveFilter.kernel.applyWithExtent(unwrappedInputImage.extent, roiCallback: { (index, destRect) -> CGRect in
@@ -114,9 +114,9 @@ class RGBToneCurveFilter: CIFilter {
         let _ = (0..<256).map { currentCurveIndex in
 
             // BGRA for upload to texture
-            let b = fmin(fmax(CGFloat(currentCurveIndex) + blueCurve[currentCurveIndex], 0), 255)
-            let g = fmin(fmax(CGFloat(currentCurveIndex) + greenCurve[currentCurveIndex], 0), 255)
-            let r = fmin(fmax(CGFloat(currentCurveIndex) + redCurve[currentCurveIndex], 0), 255)
+            let b = fmin(fmax(Float(currentCurveIndex) + blueCurve[currentCurveIndex], 0), 255)
+            let g = fmin(fmax(Float(currentCurveIndex) + greenCurve[currentCurveIndex], 0), 255)
+            let r = fmin(fmax(Float(currentCurveIndex) + redCurve[currentCurveIndex], 0), 255)
 
             toneCurveBytes[currentCurveIndex * 4] = UInt8(fmin(fmax(b + rgbCompositeCurve[Int(b)], 0), 255))
 
@@ -132,7 +132,7 @@ class RGBToneCurveFilter: CIFilter {
         toneCurveTexture = CIImage(bitmapData: data, bytesPerRow: length, size: CGSizeMake(256, 1), format: kCIFormatBGRA8, colorSpace: nil)
     }
 
-    override func setDefaults() {
+    func setDefaults() {
 
         inputRedControlPoints = RGBToneCurveFilter.defaultCurveControlPoints
         inputGreenControlPoints = RGBToneCurveFilter.defaultCurveControlPoints
@@ -157,9 +157,9 @@ class RGBToneCurveFilter: CIFilter {
 
 extension RGBToneCurveFilter {
 
-    private func getPreparedSplineCurve(points: [CIVector]) -> [CGFloat] {
+    private func getPreparedSplineCurve(points: [CIVector]) -> [Float] {
 
-        if let cachedCurve = RGBToneCurveFilter.splineCurveCache.objectForKey(points) as? [CGFloat] {
+        if let cachedCurve = RGBToneCurveFilter.splineCurveCache.objectForKey(points) as? [Float] {
 
             return cachedCurve
         }
@@ -205,14 +205,14 @@ extension RGBToneCurveFilter {
         }
 
         // Prepare the spline points.
-        var preparedSplinePoints = [CGFloat]()
+        var preparedSplinePoints = [Float]()
 
         for index in 0..<splinePoints.count {
 
             let newPoint = splinePoints[index]
             let origPoint = CIVector(x: newPoint.X, y: newPoint.X)
 
-            var distance = sqrt(pow((origPoint.X - newPoint.X), 2.0) + pow((origPoint.Y - newPoint.Y), 2.0))
+            var distance = Float(sqrt(pow((origPoint.X - newPoint.X), 2.0) + pow((origPoint.Y - newPoint.Y), 2.0)))
 
             if origPoint.Y > newPoint.Y {
                 distance = -distance
