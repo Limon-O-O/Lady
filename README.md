@@ -33,7 +33,7 @@ Swift 2.0
 ### CocoaPods
 
 ```ruby
-pod 'Lady', '~> 0.2'
+pod 'Lady', '~> 0.2.1'
 ```
 
 
