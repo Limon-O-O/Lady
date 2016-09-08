@@ -16,14 +16,14 @@ class HighPassSkinSmoothingMaskBoostFilter {
 
         guard let unwrappedInputImage = inputImage else { return nil }
 
-        return HighPassSkinSmoothingMaskBoostFilter.kernel.applyWithExtent(unwrappedInputImage.extent, arguments: [unwrappedInputImage])
+        return HighPassSkinSmoothingMaskBoostFilter.kernel.apply(withExtent: unwrappedInputImage.extent, arguments: [unwrappedInputImage])
     }
 
     private static let kernel: CIColorKernel = {
 
-        let shaderPath = NSBundle(forClass: HighPassSkinSmoothingMaskBoostFilter.self).pathForResource("\(HighPassSkinSmoothingMaskBoostFilter.self)", ofType: "cikernel")
+        let shaderPath = Bundle(for: HighPassSkinSmoothingMaskBoostFilter.self).path(forResource: "\(HighPassSkinSmoothingMaskBoostFilter.self)", ofType: "cikernel")
 
-        guard let path = shaderPath, kernelString = try? String(contentsOfFile: path, encoding: NSUTF8StringEncoding), kernel = CIColorKernel(string: kernelString) else {
+        guard let path = shaderPath, let kernelString = try? String(contentsOfFile: path, encoding: String.Encoding.utf8), let kernel = CIColorKernel(string: kernelString) else {
 
             fatalError("Unable to build HighPassSkinSmoothingMaskBoostFilter Kernel")
         }

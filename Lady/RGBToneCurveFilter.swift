@@ -50,9 +50,9 @@ class RGBToneCurveFilter {
 
     private static let kernel: CIKernel = {
 
-        let shaderPath = NSBundle(forClass: RGBToneCurveFilter.self).pathForResource("\(RGBToneCurveFilter.self)", ofType: "cikernel")
+        let shaderPath = Bundle(for: RGBToneCurveFilter.self).path(forResource: "\(RGBToneCurveFilter.self)", ofType: "cikernel")
 
-        guard let path = shaderPath, kernelString = try? String(contentsOfFile: path, encoding: NSUTF8StringEncoding), kernel = CIKernel(string: kernelString) else {
+        guard let path = shaderPath, let kernelString = try? String(contentsOfFile: path, encoding: String.Encoding.utf8), let kernel = CIKernel(string: kernelString) else {
 
             fatalError("Unable to build RGBToneCurve Kernel")
         }
@@ -60,8 +60,8 @@ class RGBToneCurveFilter {
         return kernel
     }()
 
-    private static let splineCurveCache: NSCache = {
-        let cache = NSCache()
+    fileprivate static let splineCurveCache: NSCache<AnyObject, AnyObject> = {
+        let cache = NSCache<AnyObject, AnyObject>()
         cache.name = "RGBToneCurveSplineCurveCache"
         cache.totalCostLimit = 40
         return cache
@@ -81,9 +81,9 @@ class RGBToneCurveFilter {
             unwrappedInputImage,
             unwrappedToneCurveTexture,
             inputIntensity
-        ]
+        ] as [Any]
 
-        return RGBToneCurveFilter.kernel.applyWithExtent(unwrappedInputImage.extent, roiCallback: { (index, destRect) -> CGRect in
+        return RGBToneCurveFilter.kernel.apply(withExtent: unwrappedInputImage.extent, roiCallback: { (index, destRect) -> CGRect in
 
             return index == 0 ? destRect : unwrappedToneCurveTexture.extent
 
@@ -127,9 +127,9 @@ class RGBToneCurveFilter {
             toneCurveBytes[currentCurveIndex * 4 + 3] = 255
         }
 
-        let data = NSData(bytesNoCopy: toneCurveBytes, length: length, freeWhenDone: true)
+        let data = Data(bytesNoCopy: UnsafeMutablePointer<UInt8>(toneCurveBytes), count: length, deallocator: .free)
 
-        toneCurveTexture = CIImage(bitmapData: data, bytesPerRow: length, size: CGSizeMake(256, 1), format: kCIFormatBGRA8, colorSpace: nil)
+        toneCurveTexture = CIImage(bitmapData: data, bytesPerRow: length, size: CGSize(width: 256, height: 1), format: kCIFormatBGRA8, colorSpace: nil)
     }
 
     func setDefaults() {
@@ -157,9 +157,9 @@ class RGBToneCurveFilter {
 
 extension RGBToneCurveFilter {
 
-    private func getPreparedSplineCurve(points: [CIVector]) -> [Float] {
+    fileprivate func getPreparedSplineCurve(_ points: [CIVector]) -> [Float] {
 
-        if let cachedCurve = RGBToneCurveFilter.splineCurveCache.objectForKey(points) as? [Float] {
+        if let cachedCurve = RGBToneCurveFilter.splineCurveCache.object(forKey: points as AnyObject) as? [Float] {
 
             return cachedCurve
         }
@@ -170,14 +170,14 @@ extension RGBToneCurveFilter {
         }
 
         // Sort the array.
-        let sortedPoints = points.sort { return $0.X < $1.X }
+        let sortedPoints = points.sorted { return $0.x < $1.x }
 
         // Convert from (0, 1) to (0, 255).
         var convertedPoints = [CIVector]()
 
         for index in 0..<sortedPoints.count {
             let point = sortedPoints[index]
-            convertedPoints.append(CIVector(x: point.X * 255, y: point.Y * 255))
+            convertedPoints.append(CIVector(x: point.x * 255, y: point.y * 255))
         }
 
         var splinePoints = splineCurve(convertedPoints)
@@ -187,19 +187,19 @@ extension RGBToneCurveFilter {
 
         let firstSplinePoint = splinePoints.first!
 
-        if firstSplinePoint.X > 0 {
+        if firstSplinePoint.x > 0 {
 
-            for index in (0...Int(firstSplinePoint.X)).reverse() {
+            for index in (0...Int(firstSplinePoint.x)).reversed() {
 
-                splinePoints.insert(CIVector(x: CGFloat(index), y: 0.0), atIndex: 0)
+                splinePoints.insert(CIVector(x: CGFloat(index), y: 0.0), at: 0)
             }
         }
 
         // Insert points similarly at the end, if necessary.
         let lastSplinePoint = splinePoints.last!
 
-        if lastSplinePoint.X < 255 {
-            for index in (Int(lastSplinePoint.X) + 1)...255 {
+        if lastSplinePoint.x < 255 {
+            for index in (Int(lastSplinePoint.x) + 1)...255 {
                 splinePoints.append(CIVector(x: CGFloat(index), y: 255))
             }
         }
@@ -210,23 +210,23 @@ extension RGBToneCurveFilter {
         for index in 0..<splinePoints.count {
 
             let newPoint = splinePoints[index]
-            let origPoint = CIVector(x: newPoint.X, y: newPoint.X)
+            let origPoint = CIVector(x: newPoint.x, y: newPoint.x)
 
-            var distance = Float(sqrt(pow((origPoint.X - newPoint.X), 2.0) + pow((origPoint.Y - newPoint.Y), 2.0)))
+            var distance = Float(sqrt(pow((origPoint.x - newPoint.x), 2.0) + pow((origPoint.y - newPoint.y), 2.0)))
 
-            if origPoint.Y > newPoint.Y {
+            if origPoint.y > newPoint.y {
                 distance = -distance
             }
 
             preparedSplinePoints.append(distance)
         }
 
-        RGBToneCurveFilter.splineCurveCache.setObject(preparedSplinePoints, forKey: points, cost: 1)
+        RGBToneCurveFilter.splineCurveCache.setObject(preparedSplinePoints as AnyObject, forKey: points as AnyObject, cost: 1)
 
         return preparedSplinePoints
     }
 
-    private func splineCurve(points: [CIVector]) -> [CIVector] {
+    private func splineCurve(_ points: [CIVector]) -> [CIVector] {
 
         let sd = secondDerivative(points)
 
@@ -245,16 +245,16 @@ extension RGBToneCurveFilter {
             let cur = points[index]
             let next = points[index+1]
 
-            for x in Int(cur.X)..<Int(next.X) {
+            for x in Int(cur.x)..<Int(next.x) {
 
-                let t: CGFloat = (CGFloat(x) - cur.X) / (next.X - cur.X)
+                let t: CGFloat = (CGFloat(x) - cur.x) / (next.x - cur.x)
 
                 let a = 1.0 - t
                 let b = t
-                let h = next.X - cur.X
+                let h = next.x - cur.x
 
                 // build time optimizations
-                let part1: CGFloat = a * cur.Y + b * next.Y
+                let part1: CGFloat = a * cur.y + b * next.y
                 let part2: CGFloat = (h * h / 6.0)
                 let part3: CGFloat = (a * a * a - a) * sd[index]
                 let part4: CGFloat = (b * b * b - b) * sd[index+1]
@@ -275,7 +275,7 @@ extension RGBToneCurveFilter {
         return output
     }
 
-    private func secondDerivative(points: [CIVector]) -> [CGFloat] {
+    private func secondDerivative(_ points: [CIVector]) -> [CGFloat] {
 
         let n = points.count
 
@@ -284,9 +284,9 @@ extension RGBToneCurveFilter {
             return []
         }
 
-        var matrix = Array(count: n, repeatedValue: Array(count: 3, repeatedValue: CGFloat()))
+        var matrix = Array(repeating: Array(repeating: CGFloat(), count: 3), count: n)
 
-        var result = Array(count: n, repeatedValue: CGFloat())
+        var result = Array(repeating: CGFloat(), count: n)
 
         matrix[0][1] = 1
 
@@ -300,10 +300,10 @@ extension RGBToneCurveFilter {
             let P2 = points[index]
             let P3 = points[index+1]
 
-            matrix[index][0] = (P2.X-P1.X) / 6.0
-            matrix[index][1] = (P3.X-P1.X) / 3.0
-            matrix[index][2] = (P3.X-P2.X) / 6.0
-            result[index] = (P3.Y-P2.Y)/(P3.X-P2.X) - (P2.Y-P1.Y)/(P2.X-P1.X)
+            matrix[index][0] = (P2.x-P1.x) / 6.0
+            matrix[index][1] = (P3.x-P1.x) / 3.0
+            matrix[index][2] = (P3.x-P2.x) / 6.0
+            result[index] = (P3.y-P2.y)/(P3.x-P2.x) - (P2.y-P1.y)/(P2.x-P1.x)
         }
 
         // What about result[0] and result[n-1]? Assuming 0 for now (Brad L.)
@@ -327,7 +327,7 @@ extension RGBToneCurveFilter {
         }
 
         // solving pass2 (down->up)
-        for index in (0...n-2).reverse() {
+        for index in (0...n-2).reversed() {
 
             let denominator = matrix[index+1][1]
             let k: CGFloat = denominator == 0.0 ? 0.0 : matrix[index][2] / denominator
@@ -351,9 +351,9 @@ extension RGBToneCurveFilter {
 }
 
 private extension UnsafeMutablePointer {
-    static func calloc<T>(count: Int, initialValue: T) -> UnsafeMutablePointer<T> {
-        let ptr = UnsafeMutablePointer<T>.alloc(count)
-        ptr.initializeFrom(Repeat(count: count, repeatedValue: initialValue))
+    static func calloc<T>(_ count: Int, initialValue: T) -> UnsafeMutablePointer<T> {
+        let ptr = UnsafeMutablePointer<T>.allocate(capacity: count)
+        ptr.initialize(from: repeatElement(initialValue, count: count))
         return ptr
     }
 }

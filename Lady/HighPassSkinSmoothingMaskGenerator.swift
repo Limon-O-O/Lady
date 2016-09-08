@@ -16,7 +16,7 @@ class HighPassSkinSmoothingMaskGenerator {
 
     var outputImage: CIImage? {
 
-        guard let unwrappedInputImage = inputImage, exposureFilter = exposureFilter else { return nil }
+        guard let unwrappedInputImage = inputImage, let exposureFilter = exposureFilter else { return nil }
 
         exposureFilter.setValue(unwrappedInputImage, forKey: kCIInputImageKey)
         exposureFilter.setValue(-1.0, forKey: kCIInputEVKey)

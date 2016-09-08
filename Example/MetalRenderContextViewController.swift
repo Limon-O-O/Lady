@@ -32,35 +32,35 @@ class MetalRenderContextViewController: UIViewController, MTKViewDelegate {
         metalView.framebufferOnly = false
         metalView.enableSetNeedsDisplay = true
  
-        context = CIContext(MTLDevice: device, options: [kCIContextWorkingColorSpace:CGColorSpaceCreateDeviceRGB()!])
-        commandQueue = device.newCommandQueue()
-        
-        inputTexture = try! MTKTextureLoader(device: self.metalView.device!).newTextureWithCGImage(UIImage(named: "SampleImage")!.CGImage!, options: nil)
+        context = CIContext(mtlDevice: device, options: [kCIContextWorkingColorSpace:CGColorSpaceCreateDeviceRGB()])
+        commandQueue = device.makeCommandQueue()
+
+        inputTexture = try! MTKTextureLoader(device: self.metalView.device!).newTexture(with: UIImage(named: "SampleImage")!.cgImage!, options: nil)
     }
 
-    func drawInMTKView(view: MTKView) {
+    func draw(in view: MTKView) {
 
-        let commandBuffer = commandQueue.commandBuffer()
-        
-        let inputCIImage = CIImage(MTLTexture: inputTexture, options: nil)
+        let commandBuffer = commandQueue.makeCommandBuffer()
+
+        let inputCIImage = CIImage(mtlTexture: inputTexture, options: nil)
 
         filter.inputImage = inputCIImage
         filter.inputAmount = 0.7
-        filter.inputRadius = Float(7.0 * inputCIImage.extent.width/750.0)
+        filter.inputRadius = Float(7.0 * (inputCIImage?.extent.width)!/750.0)
 
         let outputCIImage = filter.outputImage!
         
-        let cs = CGColorSpaceCreateDeviceRGB()!
+        let cs = CGColorSpaceCreateDeviceRGB()
         let outputTexture = view.currentDrawable?.texture
 
-        context.render(outputCIImage, toMTLTexture: outputTexture!,
+        context.render(outputCIImage, to: outputTexture!,
             commandBuffer: commandBuffer, bounds: outputCIImage.extent, colorSpace: cs)
 
-        commandBuffer.presentDrawable(view.currentDrawable!)
+        commandBuffer.present(view.currentDrawable!)
         commandBuffer.commit()
     }
-    
-    func mtkView(view: MTKView, drawableSizeWillChange size: CGSize) {
+
+    func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
         view.draw()
     }
 }

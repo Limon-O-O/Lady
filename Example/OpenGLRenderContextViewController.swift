@@ -21,23 +21,23 @@ class OpenGLRenderContextViewController: GLKViewController {
 
     private var filter = HighPassSkinSmoothingFilter()
 
-    private var inputCIImage = CIImage(CGImage: UIImage(named: "SampleImage")!.CGImage!)
+    private var inputCIImage = CIImage(cgImage: UIImage(named: "SampleImage")!.cgImage!)
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let eaglContext = EAGLContext(API: .OpenGLES2)
+        let eaglContext = EAGLContext(api: .openGLES2)
 
         context = {
-            return CIContext(EAGLContext: eaglContext, options: [kCIContextWorkingColorSpace: CGColorSpaceCreateDeviceRGB()!])
+            return CIContext(eaglContext: eaglContext!, options: [kCIContextWorkingColorSpace: CGColorSpaceCreateDeviceRGB()])
         }()
 
-        glkView.context = eaglContext
+        glkView.context = eaglContext!
     }
 
-    override func glkView(view: GLKView, drawInRect rect: CGRect) {
+    override func glkView(_ view: GLKView, drawIn rect: CGRect) {
 
-        let amount = abs(sin(NSDate().timeIntervalSinceDate(self.startDate)) * 0.7)
+        let amount = abs(sin(NSDate().timeIntervalSince(self.startDate as Date)) * 0.7)
 
         title = String(format: "Input Amount: %.3f", amount)
 
@@ -48,6 +48,6 @@ class OpenGLRenderContextViewController: GLKViewController {
 
         let outputCIImage = filter.outputImage!
         
-        context.drawImage(outputCIImage, inRect: AVMakeRectWithAspectRatioInsideRect(outputCIImage.extent.size, CGRectApplyAffineTransform(self.view.bounds, CGAffineTransformMakeScale(UIScreen.mainScreen().scale, UIScreen.mainScreen().scale))), fromRect: outputCIImage.extent)
+        context.draw(outputCIImage, in: AVMakeRect(aspectRatio: outputCIImage.extent.size, insideRect: self.view.bounds.applying(CGAffineTransform(scaleX: UIScreen.main.scale, y: UIScreen.main.scale))), from: outputCIImage.extent)
     }
 }

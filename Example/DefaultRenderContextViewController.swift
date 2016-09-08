@@ -13,20 +13,20 @@ import MobileCoreServices.UTType
 class DefaultRenderContextViewController: UIViewController {
 
     private let context: CIContext = {
-        let eaglContext = EAGLContext(API: .OpenGLES2)
-        let options = [kCIContextWorkingColorSpace: CGColorSpaceCreateDeviceRGB()!]
-        return CIContext(EAGLContext: eaglContext, options: options)
+        let eaglContext = EAGLContext(api: .openGLES2)
+        let options = [kCIContextWorkingColorSpace: CGColorSpaceCreateDeviceRGB()]
+        return CIContext(eaglContext: eaglContext!, options: options)
     }()
 
     private let filter = HighPassSkinSmoothingFilter()
     
     @IBOutlet private weak var imageView: UIImageView!
 
-    @IBOutlet private weak var amountSlider: UISlider!
+    @IBOutlet fileprivate weak var amountSlider: UISlider!
 
-    private var sourceImage: UIImage! {
+    fileprivate var sourceImage: UIImage! {
         didSet {
-            self.inputCIImage = CIImage(CGImage: self.sourceImage.CGImage!)
+            self.inputCIImage = CIImage(cgImage: self.sourceImage.cgImage!)
         }
     }
 
@@ -44,7 +44,7 @@ class DefaultRenderContextViewController: UIViewController {
         self.processImage(byInputAmount: sender.value)
     }
 
-    private func processImage(byInputAmount inputAmount: Float) {
+    fileprivate func processImage(byInputAmount inputAmount: Float) {
 
         filter.inputImage = inputCIImage
         filter.inputAmount = inputAmount
@@ -52,32 +52,32 @@ class DefaultRenderContextViewController: UIViewController {
 
         let outputCIImage = filter.outputImage!
 
-        let outputCGImage = context.createCGImage(outputCIImage, fromRect: outputCIImage.extent)
-        let outputUIImage = UIImage(CGImage: outputCGImage, scale: self.sourceImage.scale, orientation: sourceImage.imageOrientation)
+        let outputCGImage = context.createCGImage(outputCIImage, from: outputCIImage.extent)
+        let outputUIImage = UIImage(cgImage: outputCGImage!, scale: self.sourceImage.scale, orientation: sourceImage.imageOrientation)
         
         self.processedImage = outputUIImage
         self.imageView.image = outputUIImage
     }
     
     @IBAction private func handleImageViewLongPress(sender: UILongPressGestureRecognizer) {
-        if sender.state == .Began {
+        if sender.state == .began {
             self.imageView.image = self.sourceImage
-        } else if (sender.state == .Ended || sender.state == .Cancelled) {
+        } else if (sender.state == .ended || sender.state == .cancelled) {
             self.imageView.image = self.processedImage
         }
     }
 
     @IBAction private func chooseImageBarButtonItemTapped(sender: AnyObject) {
         let imagePickerController = UIImagePickerController()
-        imagePickerController.view.backgroundColor = UIColor.whiteColor()
+        imagePickerController.view.backgroundColor = UIColor.white
         imagePickerController.delegate = self
-        self.presentViewController(imagePickerController, animated: true, completion: nil)
+        self.present(imagePickerController, animated: true, completion: nil)
     }
 }
 
 extension DefaultRenderContextViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+    private func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
 
         if let mediaType = info[UIImagePickerControllerMediaType] as? String {
 
@@ -92,6 +92,6 @@ extension DefaultRenderContextViewController: UIImagePickerControllerDelegate, U
             }
         }
 
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 }
