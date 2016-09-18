@@ -26,14 +26,14 @@ YUCIHighPassSkinSmoothing is an implementation of [High Pass Skin Smoothing](htt
 
 iOS 8.0
 
-Swift 2.0
+Swift 3.0
 
 ## Installation
 
 ### CocoaPods
 
 ```ruby
-pod 'Lady', '~> 0.2.1'
+pod 'Lady', '~> 0.3'
 ```
 
 
