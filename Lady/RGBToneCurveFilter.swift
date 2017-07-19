@@ -353,7 +353,7 @@ extension RGBToneCurveFilter {
 private extension UnsafeMutablePointer {
     static func calloc<T>(_ count: Int, initialValue: T) -> UnsafeMutablePointer<T> {
         let ptr = UnsafeMutablePointer<T>.allocate(capacity: count)
-        ptr.initialize(from: repeatElement(initialValue, count: count))
+        ptr.initialize(to: initialValue, count: count)
         return ptr
     }
 }
