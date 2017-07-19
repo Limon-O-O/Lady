@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "Lady"
-  s.version          = "0.3"
+  s.version          = "0.3.1"
   s.summary          = "High Pass Skin Smoothing."
 
   s.description      = <<-DESC
