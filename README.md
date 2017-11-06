@@ -34,7 +34,7 @@ Swift 3.0
 ### CocoaPods
 
 ```ruby
-pod 'Lady', '~> 0.3.1'
+pod 'Lady', '~> 0.4'
 ```
 ### Carthage
 
