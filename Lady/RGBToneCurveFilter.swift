@@ -52,7 +52,7 @@ class RGBToneCurveFilter {
 
         let shaderPath = Bundle(for: RGBToneCurveFilter.self).path(forResource: "\(RGBToneCurveFilter.self)", ofType: "cikernel")
 
-        guard let path = shaderPath, let kernelString = try? String(contentsOfFile: path, encoding: String.Encoding.utf8), let kernel = CIKernel(string: kernelString) else {
+        guard let path = shaderPath, let kernelString = try? String(contentsOfFile: path, encoding: String.Encoding.utf8), let kernel = CIKernel(source: kernelString) else {
 
             fatalError("Unable to build RGBToneCurve Kernel")
         }
@@ -83,7 +83,7 @@ class RGBToneCurveFilter {
             inputIntensity
         ] as [Any]
 
-        return RGBToneCurveFilter.kernel.apply(withExtent: unwrappedInputImage.extent, roiCallback: { (index, destRect) -> CGRect in
+        return RGBToneCurveFilter.kernel.apply(extent: unwrappedInputImage.extent, roiCallback: { (index, destRect) -> CGRect in
 
             return index == 0 ? destRect : unwrappedToneCurveTexture.extent
 
